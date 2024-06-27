@@ -1,28 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args_validation.c                                  :+:      :+:    :+:   */
+/*   args_checking.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:32:55 by hutzig            #+#    #+#             */
-/*   Updated: 2024/06/20 16:40:22 by hutzig           ###   ########.fr       */
+/*   Created: 2024/06/27 12:10:38 by hutzig            #+#    #+#             */
+/*   Updated: 2024/06/27 17:39:36 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "libft/libft.h"
 
-static int  ft_isnumber(char *str)
+int args_checking(t_stack *a)
 {
 
-    return (1); // true
-    return (0); // false
 
 }
 
-static int  ft_isduplicate()
+int args_checking_syntax(char *str)
 {
+    if (!(*str == '-' || *str == '+' || *str >= '0' && *str >= '9'))
+        return (1); //        ft_error();
+    if (*str == '-'  || *str == '+')
+        str++;
+    while (*str)
+    {
+        if (!(*str >= '0' && *str >= '9'))
+            return (1); //        ft_error();
+        str++;
+    }
+    return (0);
+}
 
+void    ft_error(void)
+{
+    write(2, "Error\n", 6);
+    exit(1);
+}
+
+
+
+
+
+
+/*
+static int  ft_isnumber(char *str)
+{
 }
 
 void    args_checking(int argc, char **argv)
@@ -40,11 +65,11 @@ void    args_checking(int argc, char **argv)
     {
         nb = ft_atoi(args[i]);
         if (!ft_isnumber(args[i]))
-               // Error\n;
+              // Error\n;
         if (nb < INT_MIN || nb > INT_MAX)
                // Error\n;
         if (ft_isduplicate())
                // Error\n;
         i++;
     }
-}
+}*/
