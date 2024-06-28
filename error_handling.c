@@ -1,31 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/20 14:09:10 by hutzig            #+#    #+#             */
-/*   Updated: 2024/06/28 14:02:21 by hutzig           ###   ########.fr       */
+/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
+/*   Updated: 2024/06/28 14:11:04 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int main(int argc, char **argv)
+void    ft_error(void)
 {
-    t_stack *a;
+    write(2, "Error\n", 6);
+    exit(EXIT_FAILURE);
+}
 
-    a = NULL;
-    if (argc < 2)
-        return (0); // "If no parameters are specified, the program must not display anything and give the prompt back."
-    else
-        a = stack_processing(argc, argv);
-    if (!a || stack_checking_dup(a))
+void    ft_free_array(char **args)
+{
+    int i;
+
+    i = 0;
+    if (args)
     {
-        ft_free_stack(&a);
-        ft_error();
+        while (args[i])
+        {
+            free(args[i]);
+            i++;
+        }
+        free(args);
     }
-    push_swap_function // ACTUALLY DO THE SORTNG FROM HERE //
+}
 
+void    ft_free_stack(t_stack *a)
+{
+    t_stack *tmp;
+
+    if (!a)
+        return ;
+    while (a)
+    {
+        tmp = a->next;
+        free(a);
+        a = tmp;
+    }
 }
