@@ -6,14 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/01 11:29:28 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/02 16:14:25 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "libft/libft.h"
 
-char	**args_processing(int argc, char **argv)
+static char	**args_processing(int argc, char **argv)
 {
 	char	**args;
 	int	i;
@@ -30,7 +29,7 @@ char	**args_processing(int argc, char **argv)
 		args = argv + 1;
 	while (*args[i])
 	{
-		if (!args_checking_syntax(args[i]))
+		if (!checking_syntax_error(args[i]))
 		{
 			if (argc == 2)
 				ft_free_array(args);
@@ -41,7 +40,10 @@ char	**args_processing(int argc, char **argv)
 	return (args);
 }
 
-void	stack_appending(t_stack **a, int nb)
+// create new node, add nb to its content and set next and prev to NULL;
+// if the stack is empty, set the new node as the head of the list;
+// else, find the last node and append the new node at the end;
+static void	stack_appending(t_stack **a, int nb)
 {
 	t_stack	*new;
 	t_stack	*last;
@@ -49,14 +51,11 @@ void	stack_appending(t_stack **a, int nb)
 	new = malloc(sizeof(t_stack));
 	if (!new)
 		ft_error();
-	// create new node, add nb to its content and set next and prev to NULL;
 	new->nb = nb;
 	new->next = NULL;
 	new->prev = NULL;
-	// if the stack is empty, set the new node as the head of the list;
 	if (*a == NULL)
 		*a = new;
-	// find the last node and append the new node at the end;
 	else
 	{
 		last = *a;
@@ -69,17 +68,23 @@ void	stack_appending(t_stack **a, int nb)
 
 t_stack	*stack_processing(int argc, char **argv)
 {
-	t_stack		*a;
-	char		**args;
-	int long	nb;
-
+	t_stack	*a;
+	char	**args;
+	int	nb;
+	int	i;
+	
 	a = NULL;
+	i = 0;
 	args = args_processing(argc, argv);
 	while (*args[i])
 	{
-		nb = ft_atoi(args[i]); // need to be update to int long
-		if (nb < INT_MIN || nb > INT_MAX)
+		if (!checking_is_integer(args[i]))
+		{	
+			if (argc == 2)
+				ft_free_array(args);
 			ft_error();
+		}
+		nb = ft_atoi(args[i]);
 		stack_appending(&a, nb);
 		i++;
 	}

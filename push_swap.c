@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:09:10 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/01 11:35:12 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/02 11:48:56 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
+	t_stack	*b;
 
 	a = NULL;
+	b = NULL;
 	if (argc < 2)
 		return (0);
 	else
@@ -26,6 +28,7 @@ int	main(int argc, char **argv)
 		ft_free_stack(&a);
 		ft_error();
 	}
-	// ACTUALLY DO THE SORTNG FROM HERE //
-	push_swap_function();
+	stack_sorting(&a, &b);
+	ft_free_stack(&a);
+	return (0);
 }

@@ -1,49 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_lstlast_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/05/02 14:59:20 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 15:35:04 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+t_list	*ft_lstlast(t_list *lst)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
+	t_list	*tmp_lst;
+
+	if (!lst)
+		return (NULL);
+	tmp_lst = lst;
+	while (tmp_lst->next != NULL)
+		tmp_lst = tmp_lst->next;
+	return (tmp_lst);
 }
-
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
-	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
-	}
-}
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* The function receive a pointer to an actual linked list and returns the
+ * last node of the list. Exists the while loop when tmp_lst->next= NULL. */

@@ -1,49 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_lstdelone_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/05/02 16:04:53 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 16:05:41 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+void	ft_lstdelone(t_list *lst, void (*del)(void *))
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
-
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
-	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
-	}
-}
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
+	if (!del)
 		return ;
-	while (*a)
+	if (lst)
 	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
+		del(lst->content);
+		free(lst);
 	}
 }
+/* The function deletes a single node from the linked list while freeing up
+ * any dynamically allocated memory associated with the node's content.
+ * Call the del function with a pointer to the content of *lst as a parameter
+ * and free the memory for the node itself. */

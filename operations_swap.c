@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:27:52 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/01 14:21:15 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/02 10:32:18 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,6 @@ void	sa(t_stack **a)
 	if (!(*a) || (*a)->next == NULL)
 		return ;
 	swap_first_elements(a);
-	/*tmp = *a;
-	*a = (*a)->next;
-	tmp->next = (*a)->next;
-	if (tmp->next)
-		tmp->next->prev = tmp;
-	(*a)->next = tmp;
-	(*a)->prev = tmp->prev;
-	tmp->prev = *a;*/
 	write(1, "sa\n", 3);
 }
 
@@ -52,14 +44,6 @@ void	sb(t_stack **b)
 	if (!(*b) || (*b)->next == NULL)
 		return ;
 	swap_first_elements(b);
-	/*tmp = *b;
-	*b = (*b)->next;
-	tmp->next = (*b)->next;
-	if (tmp->next)
-		tmp->next->prev = tmp;
-	(*b)->next = tmp;
-	(*b)->prev = tmp->prev;
-	tmp->prev = *b;*/
 	write(1, "sb\n", 3);
 }
 
@@ -70,21 +54,5 @@ void	ss(t_stack **a, t_stack **b)
 		return ;
 	swap_first_elements(a);
 	swap_first_elements(b);
-	/*tmp = *a;
-	*a = (*a)->next;
-	tmp->next = (*a)->next;
-	if (tmp->next)
-		tmp->next->prev = tmp;
-	(*a)->next = tmp;
-	(*a)->prev = tmp->prev;
-	tmp->prev = *a;
-	tmp = *b;
-	*b = (*b)->next;
-	tmp->next = (*b)->next;
-	if (tmp->next)
-		tmp->next->prev = tmp;
-	(*b)->next = tmp;
-	(*b)->prev = tmp->prev;
-	tmp->prev = *b; */
 	write(1, "ss\n", 3);
 }

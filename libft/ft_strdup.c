@@ -1,49 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/04/23 14:24:51 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 11:59:43 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strdup(const char *s1)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+	char	*str_copy;
+	int		i;
 
-void	ft_free_array(char **args)
-{
-	int	i;
-
+	str_copy = malloc(sizeof(char) * (ft_strlen(s1) + 1));
+	if (!str_copy)
+		return (NULL);
 	i = 0;
-	if (args)
+	while (s1[i])
 	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
+		str_copy[i] = s1[i];
+		i++;
 	}
+	str_copy[i] = '\0';
+	return (str_copy);
 }
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* The function does a copy of s1 after (and if) allocates sufficient
+ * memory for it and returns a pointer or NULL if malloc fails. */

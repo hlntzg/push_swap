@@ -1,49 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/04/18 09:31:33 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 10:35:21 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
-
-void	ft_free_array(char **args)
-{
-	int	i;
+	size_t	i;
 
 	i = 0;
-	if (args)
+	while ((s1[i] != '\0' || s2[i] != '\0') && (i < n))
 	{
-		while (args[i])
+		if ((unsigned char) s1[i] != (unsigned char) s2[i])
 		{
-			free(args[i]);
-			i++;
+			return ((unsigned char) s1[i] - (unsigned char) s2[i]);
 		}
-		free(args);
+		i++;
 	}
+	return (0);
 }
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* The function compares n characters in both strings until the '\0'. */

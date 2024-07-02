@@ -1,49 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/04/22 16:19:08 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 17:00:18 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+char	*ft_strchr(const char *s, int c)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+	char	convert_c;
 
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
+	convert_c = (char) c;
+	while (*s != '\0' || *s == '\0')
 	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
+		if (*s == convert_c)
+			return ((char *) s);
+		else if (*s == '\0')
+			break ;
+		s++;
 	}
+	return (NULL);
 }
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* The function returns a pointer to the first occurence of c 
+ * (converted to unsigned char) in the strins s (if there is one).
+ * Otherswise, it returns NULL. */

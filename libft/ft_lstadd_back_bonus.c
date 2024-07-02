@@ -1,49 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_lstadd_back_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/05/02 14:33:42 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 15:48:48 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+	t_list	*last;
 
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
-	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
-	}
-}
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
+	if (lst == NULL)
 		return ;
-	while (*a)
+	if (*lst == NULL)
 	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
+		*lst = new;
+		return ;
 	}
+	last = ft_lstlast(*lst);
+	last->next = new;
 }
+/* If the list is empty, append to the list the ‘new’ node by dereferencing.
+ * Otherwise, access the last node and cancel the value NULL of the node
+ * and assign to it the value of new. */

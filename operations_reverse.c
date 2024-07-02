@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:39:13 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/01 16:25:52 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/02 10:30:44 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,6 @@ void	shift_down_elements(t_stack **stack)
 		last = last->next;
 	*stack = last;
 	last->prev->next = NULL;
-// Update the next pointer of the node just before the last element 
-// (i.e., last->prev->next) to NULL, effectively removing the last element 
-// from its previous position.
 	last->prev = NULL;
 	first->prev = last;
 	last->next = first;

@@ -1,49 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/04/18 15:18:02 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 09:55:48 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+void	ft_bzero(void *s, size_t n)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+	unsigned char	*tmp_ptr;
 
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
+	tmp_ptr = s;
+	while (n--)
 	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
+		*tmp_ptr = 0;
+		tmp_ptr++;
 	}
 }
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* If n > 0, the function writes zeroed bytes to the string s. It works similar
+ * as the memset function (without specitying the character to be written). */

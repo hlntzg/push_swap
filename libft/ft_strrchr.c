@@ -1,49 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/04/22 17:27:12 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 15:37:55 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-void	ft_error(void)
+char	*ft_strrchr(const char *s, int c)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+	char	convert_c;
+	char	*res;
 
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
+	convert_c = (char) c;
+	res = 0;
+	while (*s != '\0')
 	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
+		if (*s == convert_c)
+			res = (char *) s;
+		s++;
 	}
+	if (convert_c == '\0')
+		res = (char *) s;
+	return ((char *) res);
 }
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* The function is similar to strchr, but locates the last occurence of c. */

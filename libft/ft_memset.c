@@ -1,49 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handling.c                                   :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Created: 2024/04/18 10:51:21 by hutzig            #+#    #+#             */
+/*   Updated: 2024/05/06 13:11:29 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-void	ft_error(void)
+void	*ft_memset(void *b, int c, size_t len)
 {
-	write(2, "Error\n", 6);
-	exit(EXIT_FAILURE);
-}
+	unsigned char	*tmp_ptr;
 
-void	ft_free_array(char **args)
-{
-	int	i;
-
-	i = 0;
-	if (args)
+	tmp_ptr = b;
+	while (len--)
 	{
-		while (args[i])
-		{
-			free(args[i]);
-			i++;
-		}
-		free(args);
+		*tmp_ptr = (unsigned char) c;
+		tmp_ptr++;
 	}
+	return (b);
 }
-
-void	ft_free_stack(t_stack **a)
-{
-	t_stack	*tmp;
-
-	if (!a)
-		return ;
-	while (*a)
-	{
-		tmp = (*a)->next;
-		free(*a);
-		*a = tmp;
-	}
-}
+/* As the return value is the first parameter of the function,
+ * the use of a temporary variable is necessary (*tmp_ptr) to  write len bytes
+ * of value c (converted to an unsigned char) to the string b. */
