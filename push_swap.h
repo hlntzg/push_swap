@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 15:36:26 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 17:08:01 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	stack_sorting(t_stack **a, t_stack **b);
 
 // utils
 int	ft_stack_size(t_stack **stack);
+t_stack	*ft_stack_last(t_stack **stack);
 
 // operations
 void	sa(t_stack **a);

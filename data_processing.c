@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 16:27:55 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 17:08:08 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	**args_processing(int argc, char **argv)
 		args = argv + 1;
 	while (args[i])
 	{
-		if (checking_syntax_error(args[i]))
+		if (checking_syntax_error(args[i]) || !checking_is_integer(args[i]))
 		{
 			if (argc == 2)
 				ft_free_array(args);
@@ -58,9 +58,10 @@ static void	stack_appending(t_stack **a, int nb)
 		*a = new;
 	else
 	{
-		last = *a;
-		while (last->next != NULL)
-			last = last->next;
+		last = ft_stack_last(a);
+		//last = *a;
+	//	while (last->next != NULL)
+	//		last = last->next;
 		last->next = new;
 		new->prev = last;
 	}
@@ -68,22 +69,20 @@ static void	stack_appending(t_stack **a, int nb)
 
 t_stack	*stack_processing(int argc, char **argv, t_stack *a)
 {
-//	t_stack	*a;
 	char	**args;
 	int	nb;
 	int	i;
 	
-//	a = NULL;
 	i = 0;
 	args = args_processing(argc, argv);
 	while (args[i])
 	{
-		if (!checking_is_integer(args[i]))
-		{	
-			if (argc == 2)
-				ft_free_array(args);
-			ft_error();
-		}
+//		if (!checking_is_integer(args[i]))
+//		{	
+//			if (argc == 2)
+//				ft_free_array(args);
+//			ft_error();
+//		}
 		nb = ft_atoi(args[i]);
 		stack_appending(&a, nb);
 		i++;
