@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 16:14:25 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 14:31:50 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	**args_processing(int argc, char **argv)
 	}
 	else
 		args = argv + 1;
-	while (*args[i])
+	while (args[i])
 	{
 		if (!checking_syntax_error(args[i]))
 		{
@@ -66,17 +66,17 @@ static void	stack_appending(t_stack **a, int nb)
 	}
 }
 
-t_stack	*stack_processing(int argc, char **argv)
+t_stack	*stack_processing(int argc, char **argv, t_stack *a)
 {
-	t_stack	*a;
+//	t_stack	*a;
 	char	**args;
 	int	nb;
 	int	i;
 	
-	a = NULL;
+//	a = NULL;
 	i = 0;
 	args = args_processing(argc, argv);
-	while (*args[i])
+	while (args[i])
 	{
 		if (!checking_is_integer(args[i]))
 		{	

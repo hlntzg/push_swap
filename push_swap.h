@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 16:13:44 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 12:37:34 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,26 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }	t_stack;
 
-t_stack	*stack_processing(int argc, char **argv);
+t_stack	*stack_processing(int argc, char **argv, t_stack *a);
 void	stack_sorting(t_stack **a, t_stack **b);
 
+// utils
+int	ft_stack_size(t_stack **stack);
+
+// operations
+void	sa(t_stack **a);
+
+// checkings
 bool	stack_sorting_check(t_stack **a);
 bool	stack_checking_dup(t_stack *a);
 bool	checking_syntax_error(char *str);
 bool	checking_is_integer(char *str);
 
+// error and free
 void	ft_error(void);
 void	ft_free_array(char **args);
 void	ft_free_stack(t_stack **a);
+void	exit_success(t_stack **a, t_stack **b);
+void	exit_failure(t_stack **a, t_stack **b);
 
 #endif

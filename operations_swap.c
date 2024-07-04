@@ -6,14 +6,14 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:27:52 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 10:32:18 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 09:35:17 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // this function swaps the first two elements of the given stack
-void	swap_first_elements(t_stack **stack)
+static void	swap_first_elements(t_stack **stack)
 {
 	t_stack	*tmp;
 

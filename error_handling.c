@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:36:31 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 14:12:05 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 11:24:53 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,18 @@ void	ft_free_stack(t_stack **a)
 		free(*a);
 		*a = tmp;
 	}
+}
+
+void	exit_success(t_stack **a, t_stack **b)
+{
+	ft_free_stack(a);
+	ft_free_stack(b);
+	exit(EXIT_SUCCESS);
+}
+
+void	exit_failure(t_stack **a, t_stack **b)
+{
+	ft_free_stack(a);
+	ft_free_stack(b);
+	ft_error();
 }

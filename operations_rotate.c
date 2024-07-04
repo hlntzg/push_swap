@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:35:27 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/01 15:53:20 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 09:42:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	shift_up_elements(t_stack **stack)
+static void	shift_up_elements(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*last;
@@ -42,7 +42,7 @@ void	rb(t_stack **b)
 {
 	if (!(*b) || !(*b)->next)
 		return ;
-	shift_up_elements(a);
+	shift_up_elements(b);
 	write(1, "rb\n", 3);
 }
 

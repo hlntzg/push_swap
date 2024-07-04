@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/07/02 15:33:01 by hutzig           ###   ########.fr        #
+#    Updated: 2024/07/04 11:47:47 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,11 @@ SOURCES = data_processing.c \
 	push_swap.c \
 	stack_sorting.c \
 	stack_sorting_check.c \
+	stack_utils.c \
+	operations_push.c \
+	operations_swap.c \
+	operations_reverse.c \
+	operations_rotate.c  \
 
 OBJECTS = $(SOURCES:.c=.o)
 
@@ -25,7 +30,7 @@ INCLUDE = -L ./libft -lft
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -ggdb3
 
 RM = rm -f
 

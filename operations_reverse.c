@@ -6,14 +6,14 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:39:13 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 10:30:44 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 09:38:49 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 // this function shifts down all the elements by 1, last becomes the first one
-void	shift_down_elements(t_stack **stack)
+static void	shift_down_elements(t_stack **stack)
 {
 	t_stack	*first;
 	t_stack	*last;
