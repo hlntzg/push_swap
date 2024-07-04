@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 11:56:01 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/02 15:02:17 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 15:44:08 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,14 @@
 //  this function checks if the stack is sorted in ascending order
 bool	stack_sorting_check(t_stack **a)
 {
-	while ((*a)->next)
+	t_stack	*tmp;
+
+	tmp = *a;
+	while (tmp->next)
 	{
-		if ((*a)->nb > (*a)->next->nb)
+		if (tmp->nb > tmp->next->nb)
 			return (false);
-		(*a) = (*a)->next;
+		tmp = tmp->next;
 	}
 	return (true);
 }
