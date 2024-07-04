@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 14:31:50 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/04 16:27:55 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static char	**args_processing(int argc, char **argv)
 		args = argv + 1;
 	while (args[i])
 	{
-		if (!checking_syntax_error(args[i]))
+		if (checking_syntax_error(args[i]))
 		{
 			if (argc == 2)
 				ft_free_array(args);
