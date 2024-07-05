@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 09:20:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 17:07:54 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/05 15:23:57 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,4 +35,36 @@ int	ft_stack_size(t_stack **stack)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+int	ft_stack_min(t_stack **stack)
+{
+	int	min;
+	t_stack	*tmp;
+
+	tmp = *stack;
+	min = tmp->nb;
+	while (tmp)
+	{
+		if (tmp->nb < min)
+			min = tmp->nb;
+		tmp = tmp->next;
+	}
+	return (min);
+}
+
+int	ft_stack_max(t_stack **stack)
+{
+	int	max;
+	t_stack	*tmp;
+
+	tmp = *stack;
+	max = tmp->nb;
+	while (tmp)
+	{
+		if (tmp->nb > max)
+			max = tmp->nb;
+		tmp = tmp->next;
+	}
+	return (max);
 }
