@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:30:51 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 09:37:47 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/05 15:48:28 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// this function handles the transfer of the top element from one stack to another
+// this function transfers of the top element from one stack to another
 static void	push_elements(t_stack **src, t_stack **dst)
 {
 	t_stack	*tmp;

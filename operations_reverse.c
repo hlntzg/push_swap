@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:39:13 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 17:12:11 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/05 16:02:28 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ static void	shift_down_elements(t_stack **stack)
 	t_stack	*last;
 
 	first = *stack;
-	last = *stack; // can be replaced for ft_stack_last
-	while (last->next != NULL)
-		last = last->next;
+	last = ft_stack_last(stack);
 	*stack = last;
 	last->prev->next = NULL;
 	last->prev = NULL;

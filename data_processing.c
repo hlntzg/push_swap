@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/05 15:31:03 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/05 15:50:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static char	**args_processing(int argc, char **argv)
 {
 	char	**args;
-	int	i;
+	int		i;
 
 	args = NULL;
 	i = 0;
@@ -40,9 +40,6 @@ static char	**args_processing(int argc, char **argv)
 	return (args);
 }
 
-// create new node, add nb to its content and set next and prev to NULL;
-// if the stack is empty, set the new node as the head of the list;
-// else, find the last node and append the new node at the end;
 static void	stack_appending(t_stack **a, int nb)
 {
 	t_stack	*new;
@@ -59,9 +56,6 @@ static void	stack_appending(t_stack **a, int nb)
 	else
 	{
 		last = ft_stack_last(a);
-		//last = *a;
-	//	while (last->next != NULL)
-	//		last = last->next;
 		last->next = new;
 		new->prev = last;
 	}
@@ -70,19 +64,13 @@ static void	stack_appending(t_stack **a, int nb)
 t_stack	*stack_processing(int argc, char **argv, t_stack *a)
 {
 	char	**args;
-	int	nb;
-	int	i;
-	
+	int		nb;
+	int		i;
+
 	i = 0;
 	args = args_processing(argc, argv);
 	while (args[i])
 	{
-//		if (!checking_is_integer(args[i]))
-//		{	
-//			if (argc == 2)
-//				ft_free_array(args);
-//			ft_error();
-//		}
 		nb = ft_atoi(args[i]);
 		stack_appending(&a, nb);
 		i++;

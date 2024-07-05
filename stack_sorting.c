@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/05 15:23:32 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/05 16:08:06 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	sort_three_nb(t_stack **a)
+void	sorting_three(t_stack **a)
 {
 	if ((*a)->nb == ft_stack_min(a))
 	{
@@ -40,8 +40,8 @@ void	stack_sorting(t_stack **a, t_stack **b)
 	if (ft_stack_size(a) == 2)
 		sa(a);
 	else if (ft_stack_size(a) == 3)
-		sort_three_nb(a);
-	else	
+		sorting_three(a);
+	else
 	{
 		printf("sorting ...\n");
 	}
