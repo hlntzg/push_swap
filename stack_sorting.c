@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/05 16:08:06 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/10 12:01:42 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,46 @@ void	sorting_three(t_stack **a)
 	}
 }
 
+void	sorting_small(t_stack **a, t_stack **b)
+{
+	int	i;
+
+	while (ft_stack_size(a) > 3)
+	{
+		i = ft_stack_position(a, ft_stack_min(a));
+		if (i < (ft_stack_size(a) / 2))
+		{
+			while (i--)
+				ra(a);
+			pb(a, b);
+		}
+		else
+		{
+			while (i++ < ft_stack_size(a))
+				rra(a);
+			pb(a, b);
+		}
+	}
+	if (!stack_sorting_check(a))
+		sorting_three(a);
+	while (*b)
+		pa(b, a);
+}
+
+void	sorting_big(t_stack **a, t_stack **b)
+{
+	(void)a;
+	(void)b;
+}
+
 void	stack_sorting(t_stack **a, t_stack **b)
 {
-	(void)b;
 	if (ft_stack_size(a) == 2)
 		sa(a);
-	else if (ft_stack_size(a) == 3)
+	if (ft_stack_size(a) == 3)
 		sorting_three(a);
+	if (ft_stack_size(a) == 5 || ft_stack_size(a) == 4)
+		sorting_small(a, b);
 	else
-	{
-		printf("sorting ...\n");
-	}
+		sorting_big(a, b);
 }
