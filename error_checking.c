@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:37:26 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 16:27:44 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/12 13:19:28 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ bool	checking_syntax_error(char *str)
 		str++;
 	if (*str == '-' || *str == '+')
 		str++;
+	if (!*str)
+		return (true);
 	while (*str)
 	{
 		if (!(*str >= '0' && *str <= '9'))
