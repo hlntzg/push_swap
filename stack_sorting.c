@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/10 12:01:42 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/12 15:14:23 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,17 @@ void	sorting_three(t_stack **a)
 			sa(a);
 	}
 }
+/*
+void	sorting_three(t_stack **a)
+{
+	if ((*a)->nb == ft_stack_max(a);
+		ra(a);
+	else if ((*a)->next == ft_stack_max(a));
+		rra(a);
+	if ((*a)->nb > (*a)->next->nb)
+		sa(a);
+}
+*/
 
 void	sorting_small(t_stack **a, t_stack **b)
 {
@@ -41,7 +52,7 @@ void	sorting_small(t_stack **a, t_stack **b)
 	while (ft_stack_size(a) > 3)
 	{
 		i = ft_stack_position(a, ft_stack_min(a));
-		if (i < (ft_stack_size(a) / 2))
+		if (i <= (ft_stack_size(a) / 2))
 		{
 			while (i--)
 				ra(a);
