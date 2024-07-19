@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/05 15:50:13 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/19 14:51:26 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,5 +77,6 @@ t_stack	*stack_processing(int argc, char **argv, t_stack *a)
 	}
 	if (argc == 2)
 		ft_free_array(args);
+	stack_ranking_data(a);
 	return (a);
 }

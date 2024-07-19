@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/07/10 11:16:49 by hutzig           ###   ########.fr        #
+#    Updated: 2024/07/16 15:10:21 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,7 @@ all: $(NAME)
 	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJECTS)
-	@make -C libft
+	make -C libft
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(INCLUDE)
 
 clean:

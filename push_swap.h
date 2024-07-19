@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/10 11:59:25 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/19 14:13:30 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 typedef struct s_stack
 {
 	int				nb;
+	int				index;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }	t_stack;
