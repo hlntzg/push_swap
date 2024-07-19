@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/19 14:13:30 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/19 18:10:45 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,17 +19,19 @@
 # include <limits.h> // INT_MIX & INT_MAX
 # include <stdbool.h> // bool data type
 
-# include <stdio.h>
+# include <stdio.h> // REMOVE BEFORE SUBMISSION!
 
 typedef struct s_stack
 {
 	int				nb;
-	int				index;
+	int				position;
 	struct s_stack	*next;
 	struct s_stack	*prev;
 }	t_stack;
 
-t_stack	*stack_processing(int argc, char **argv, t_stack *a);
+void	print_stack(t_stack **a); // REMOVE BEFORE SUBMISSION!
+
+void	stack_processing(int argc, char **argv, t_stack **a);
 void	stack_sorting(t_stack **a, t_stack **b);
 void	sorting_three(t_stack **a);
 void	sorting_small(t_stack **a, t_stack **b);

@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/19 14:51:37 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/19 15:01:26 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	sorting_big(t_stack **a, t_stack **b)
 
 void	stack_sorting(t_stack **a, t_stack **b)
 {	
-	if (ft_stack_size(a) == 3)
+	if (ft_stack_size(a) == 2)
 		sa(a);
 	if (ft_stack_size(a) == 3)
 		sorting_three(a);

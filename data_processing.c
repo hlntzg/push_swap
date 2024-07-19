@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/19 14:51:26 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/07/19 18:08:12 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,35 @@ static void	stack_appending(t_stack **a, int nb)
 	}
 }
 
-t_stack	*stack_processing(int argc, char **argv, t_stack *a)
+static	void	stack_ranking_data(t_stack **a)
+{
+	int		i;
+	int		minimum;
+	t_stack	*tmp;
+	t_stack	*current;
+
+	i = 1;
+	while (i <= ft_stack_size(a))
+	{
+		tmp = *a;
+		minimum = INT_MAX;
+		current = NULL;
+		while (tmp)
+		{
+			if (tmp->nb <= minimum && tmp->position == 0)
+			{
+				minimum = tmp->nb;
+				current = tmp;
+			}
+			tmp = tmp->next;
+		}
+		if (current)
+			current->position = i;
+		i++;
+	}
+}
+
+void	stack_processing(int argc, char **argv, t_stack **a)
 {
 	char	**args;
 	int		nb;
@@ -72,11 +100,10 @@ t_stack	*stack_processing(int argc, char **argv, t_stack *a)
 	while (args[i])
 	{
 		nb = ft_atoi(args[i]);
-		stack_appending(&a, nb);
+		stack_appending(a, nb);
 		i++;
 	}
 	if (argc == 2)
 		ft_free_array(args);
 	stack_ranking_data(a);
-	return (a);
 }
