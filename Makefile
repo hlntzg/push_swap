@@ -6,11 +6,14 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/07/16 15:10:21 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/15 09:54:24 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
+
+DIR_LIBFT = ./lib/libft
+DIR_SRC = ./sources
 
 SOURCES = data_processing.c \
 	error_checking.c \
@@ -24,33 +27,39 @@ SOURCES = data_processing.c \
 	operations_reverse.c \
 	operations_rotate.c  \
 
-OBJECTS = $(SOURCES:.c=.o)
+SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 
-INCLUDE = -L ./libft -lft
+OBJECTS = $(SRC:.c=.o)
 
-CC = gcc
+HEADERS = -I ./include -I $(DIR_LIBFT)
 
-CFLAGS = -Wall -Wextra -Werror -ggdb3
+INCLUDE = -L $(DIR_LIBFT) -lft
+
+CC = cc
+
+CFLAGS = -Wall -Wextra -Werror
 
 RM = rm -f
 
 all: $(NAME)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): libft $(OBJECTS)
+	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDE) $(HEADERS) -o $@
 
-$(NAME): $(OBJECTS)
-	make -C libft
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJECTS) $(INCLUDE)
+libft: 
+	@make -C $(DIR_LIBFT)
+
+$(DIR_SRC)/%.o: $(DIR_LIBFT)/%.c
+	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:
 	$(RM) $(OBJECTS)
-	make clean -C libft
+	@make -C $(DIR_LIBFT) clean
 
 fclean: clean
 	$(RM) $(NAME)
-	make fclean -C libft
+	@make -C $(DIR_LIBFT) fclean
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all libft clean fclean re

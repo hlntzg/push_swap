@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/25 17:58:16 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/15 17:21:32 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,61 +70,97 @@ void	sorting_small(t_stack **a, t_stack **b)
 	while (*b)
 		pa(b, a);
 }*/
-
-void	pushing_from_a_to_b(t_stack **a, t_stack **b)
+t_stack	*target_in_b(t_stack **a, t_stack **b, t_stack *a_node)
 {
-	find_node_to_push(a, b);
-	// execute the pushing of target_in_a to the top of target_in_b  :)
-}
-
-
-// NATALIES CODE ///
-t_stack	*find_target(t_stack **b, int position)
-{
-	t_stack	*pos;
-	t_stack	*best_pos;
-	int	best_position;
-
-	pos = *b;
-	best_pos = NULL;
-	best_position = INT_MIN;
-	while (pos)
-	{
-		if (pos->position < position && pos->position > best_position)
-		{
-			best_position = pos->position;
-			best_pos = pos;
-		}
-		pos = pos->next;
-	}
-	if (best_pos == NULL)
-		best_pos = max_index(b);
-	return (best_pos);
-}
-
-void	find_node_to_push(t_stack **a, t_stack **b)
-}
-	int	cost_min;
-	int	cost_current;
-	t_stack	*tmp;
-	t_stack	*target_in_b;
-	t_stack	*target_in_a;
-
-	cost_min = INT_MIN;
-	tmp = *a;
+	t_stack	*b_node;
+	t_stack *tmp;
+	
+	tmp = *b;
+	b_node = NULL;
 	while (tmp)
-	{
-		target_in_b = find_target(b, tmp->position);
-		cost_current = // function to calculate the moves (a, b, tmp, target_in_b)
-		if (current_cost < cost_min)
+	{	
+		if (a_node->nb tmp->nb)
 		{
-			cost_min = current_cost;
-			target_in_a = tmp;
+			b_node = tmp;
 		}
 		tmp = tmp->next;
 	}
-	//return (target_in_a);
-	*a = target_in_a;
+	return (b_node);
+}
+
+int	calculate_operations(t_stack **a, t_stack **b, t_stack *node)
+{
+	int	position_a;
+	int	position_b;
+
+	position_a = ft_stack_position(a, node->nb);
+	position_b = ft_stack_position(b, (target_in_b(a, b, node))->nb);
+	if (position_a < ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+	{
+		if (position_a > position_b)
+			return (position_a);
+		else
+			return (position_b);
+	}
+	else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+	{
+		if ((ft_stack_size(a) - position_a) > (ft_stack_size(b) - position_b))
+			return (ft_stack_size(a) - positon_a);
+		else
+			return (ft_stack_size(b) - position_b);
+	}
+	else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+		return (position_a + (ft_stack_size(b) - position_b));
+	else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+		return ((ft_stack_size(a) - position_a) + position_b);
+}
+
+t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
+{
+	t_stack	*node;
+	t_stack	*tmp;
+	int		operations;
+
+	tmp = *a;
+	node = tmp;
+	operations = calculate_operations(a, b, node);
+	while (tmp)
+	{
+		if (operations < calculate_operations(a, b, node))
+		{
+			operations = calculate_operations(a, b, node);
+			node = tmp;
+		}
+		tmp = tmp->next;
+	}
+	return (node);
+}
+
+void	pushing_from_a_to_b(t_stack **a, t_stack **b)
+{
+	t_stack	*node;
+	int		position_a;
+	int		position_b;
+
+	while (ft_stack_size(a) > 3 && !stack_sorting_check(a))
+	{
+		node = find_node_to_push_to_b(a, b);
+		position_a = ft_stack_position(a, node->nb);
+		position_b = ft_stack_position(b, (target_in_b(a, b))->nb);
+		if (position_a < ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+			execute_operations_ra_rb(a, b, node); 
+		else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+			execute_operations_rra_rrb(a, b, node);
+		else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+			execute_operations_ra_rrb(a, b, node);
+		else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+			execute_operations_rra_rb(a, b, node);
+	}
+}
+
+void	pushing_from_b_to_a(t_stack **a, t_stack **b)
+{
+
 }
 
 void	sorting_big(t_stack **a, t_stack **b)
@@ -138,7 +174,7 @@ void	sorting_big(t_stack **a, t_stack **b)
 		pushing_from_a_to_b(a, b); // function to calculate and push to 'b' in right position
 	if (!stack_sorting_check(a))
 		sorting_three(a);
-	pushing_from_b_to_a();
+	pushing_from_b_to_a(a, b);
 	// check if a is sorted and position of min in a to ra or rra (?)
 }
 

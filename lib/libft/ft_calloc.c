@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/23 14:21:54 by hutzig            #+#    #+#             */
-/*   Updated: 2024/05/06 16:10:40 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/05/08 14:00:14 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 	size_t	total_size;
 
 	total_size = count * size;
-	if (count > 0 && size > 0 && total_size >= SIZE_MAX / size)
+	if (count > 0 && size > 0 && count > SIZE_MAX / size)
 		return (NULL);
 	ptr = malloc(total_size);
 	if (!ptr)
