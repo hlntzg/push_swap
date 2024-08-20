@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/19 17:24:49 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/20 08:23:22 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	sorting_three(t_stack **a)
 	if ((*a)->nb > (*a)->next->nb)
 		sa(a);
 }
+
 */
 /* MAYBE NOT NECESSARY FUNCTION
 void	sorting_small(t_stack **a, t_stack **b)
