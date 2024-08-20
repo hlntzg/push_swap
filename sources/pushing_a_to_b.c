@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/20 14:48:18 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/20 17:47:59 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node)
 
 	position_a = ft_stack_position(a, node->nb);
 	position_b = ft_stack_position(b, (target_in_b(b, node))->nb);
-	if (position_a < ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+	if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
 	{
 		if (position_a > position_b)
 			return (position_a);
 		else
 			return (position_b);
 	}
-	else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+	else if (position_a >= ft_stack_size(a) / 2 && position_b >= ft_stack_size(b) / 2)
 	{
 		if ((ft_stack_size(a) - position_a) > (ft_stack_size(b) - position_b))
 			return (ft_stack_size(a) - position_a);
@@ -60,8 +60,7 @@ int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node)
 		return (position_a + (ft_stack_size(b) - position_b));
 	else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
 		return ((ft_stack_size(a) - position_a) + position_b);
-	else
-		return (0);
+	return (0);
 }
 
 t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
@@ -71,8 +70,8 @@ t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
 	int		operations;
 
 	tmp = *a;
-	node = tmp;
-	operations = calculate_operations_to_b(a, b, node);
+//	node = tmp;
+	operations = INT_MAX; //calculate_operations_to_b(a, b, tmp);
 	while (tmp)
 	{
 		if (operations > calculate_operations_to_b(a, b, tmp))
@@ -96,9 +95,9 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 		node = find_node_to_push_to_b(a, b);
 		position_a = ft_stack_position(a, node->nb);
 		position_b = ft_stack_position(b, (target_in_b(b, node))->nb);
-		if (position_a < ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+		if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
 			execute_operations_ra_rb(a, b, node); 
-		else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+		else if (position_a >= ft_stack_size(a) / 2 && position_b >= ft_stack_size(b) / 2)
 			execute_operations_rra_rrb(a, b, node);
 		else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
 			execute_operations_ra_rrb(a, b, node);
