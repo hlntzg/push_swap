@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/15 09:54:24 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/20 09:21:16 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,41 +15,43 @@ NAME = push_swap
 DIR_LIBFT = ./lib/libft
 DIR_SRC = ./sources
 
-SOURCES = data_processing.c \
+SOURCES = push_swap.c \
+	data_processing.c \
 	error_checking.c \
 	error_handling.c \
-	push_swap.c \
+	execute_operations.c \
+	operations_push.c \
+	operations_reverse.c \
+	operations_rotate.c \
+	operations_swap.c \
+	pushing_a_to_b.c \
 	stack_sorting.c \
 	stack_sorting_check.c \
 	stack_utils.c \
-	operations_push.c \
-	operations_swap.c \
-	operations_reverse.c \
-	operations_rotate.c  \
 
 SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 
 OBJECTS = $(SRC:.c=.o)
 
-HEADERS = -I ./include -I $(DIR_LIBFT)
+HEADERS = -I ./includes -I $(DIR_LIBFT)
 
-INCLUDE = -L $(DIR_LIBFT) -lft
+LIBFT = -L $(DIR_LIBFT) -lft
 
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror
 
-RM = rm -f
+RM = rm -rf
 
 all: $(NAME)
 
 $(NAME): libft $(OBJECTS)
-	$(CC) $(CFLAGS) $(OBJECTS) $(INCLUDE) $(HEADERS) -o $@
+	$(CC) $(OBJECTS) $(LIBFT) $(HEADERS) -o $@
 
 libft: 
 	@make -C $(DIR_LIBFT)
 
-$(DIR_SRC)/%.o: $(DIR_LIBFT)/%.c
+$(DIR_SRC)/%.o: $(DIR_SRC)/%.c
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 clean:

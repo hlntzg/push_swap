@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 09:20:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/19 11:14:20 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/20 12:17:33 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	ft_stack_position(t_stack **stack, int nb)
 	int		position;
 	t_stack	*tmp;
 
-	position = 1;
+	position = 0;
 	tmp = *stack;
 	while (tmp && tmp->nb != nb)
 	{

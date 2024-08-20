@@ -6,14 +6,14 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/15 10:29:42 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/20 09:45:49 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# include "libft/libft.h"
+# include "../lib/libft/libft.h"
 # include <unistd.h> // WRITE
 # include <stdlib.h> // MALLOC, EXIT
 # include <limits.h> // INT_MIX & INT_MAX
@@ -34,8 +34,19 @@ void	print_stack(t_stack **a); // REMOVE BEFORE SUBMISSION!
 void	stack_processing(int argc, char **argv, t_stack **a);
 void	stack_sorting(t_stack **a, t_stack **b);
 void	sorting_three(t_stack **a);
-//void	sorting_small(t_stack **a, t_stack **b);
 void	sorting_big(t_stack **a, t_stack **b);
+
+// a to b
+t_stack	*target_in_b(t_stack **b, t_stack *a_node);
+int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node);
+t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b);
+void	pushing_from_a_to_b(t_stack **a, t_stack **b);
+
+// execute operations
+void	execute_operations_ra_rb(t_stack **a, t_stack **b, t_stack *node);
+void	execute_operations_rra_rrb(t_stack **a, t_stack **b, t_stack *node);
+void	execute_operations_ra_rrb(t_stack **a, t_stack **b, t_stack *node);
+void	execute_operations_rra_rb(t_stack **a, t_stack **b, t_stack *node);
 
 // utils
 t_stack	*ft_stack_last(t_stack **stack);

@@ -6,12 +6,12 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:09:10 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/19 18:39:31 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/20 11:02:53 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
+
 void	print_stack(t_stack **a)
 {
 	while (*a)
@@ -20,7 +20,7 @@ void	print_stack(t_stack **a)
 		(*a) = (*a)->next;
 	}		
 }
-*/
+
 int	main(int argc, char **argv)
 {
 	t_stack	*a;
