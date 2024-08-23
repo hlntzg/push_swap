@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/20 15:17:33 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/23 12:59:08 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	**args_processing(int argc, char **argv)
 	return (args);
 }
 
-/* static void	stack_appending(t_stack **a, int nb)
+static void	stack_appending(t_stack **a, int nb)
 {
 	t_stack	*new;
 	t_stack	*last;
@@ -50,17 +50,17 @@ static char	**args_processing(int argc, char **argv)
 		ft_error();
 	new->nb = nb;
 	new->next = NULL;
-	new->prev = NULL;
+//	new->prev = NULL;
 	if (*a == NULL)
 		*a = new;
 	else
 	{
 		last = ft_stack_last(a);
 		last->next = new;
-		new->prev = last;
+//		new->prev = last;
 	}
 }
- */
+/*
 static void	stack_appending(t_stack **a, int nb)
 {
 	t_stack	*new;
@@ -96,7 +96,6 @@ static void	stack_appending(t_stack **a, int nb)
 
 }
 
-/*
 static	void	stack_ranking_data(t_stack **a)
 {
 	int		i;

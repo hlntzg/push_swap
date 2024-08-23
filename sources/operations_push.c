@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:30:51 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/21 17:12:04 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/23 15:18:56 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	push_elements(t_stack **src, t_stack **dst)
 
 	tmp = *src;
 	*src = (*src)->next;
-	if (*src)
-		(*src)->prev = NULL;
+//	if (*src)
+//		(*src)->prev = NULL;
 	tmp->next = *dst;
-	if (*dst)
-		(*dst)->prev = tmp;
+//	if (*dst)
+//		(*dst)->prev = tmp;
 	*dst = tmp;
-	(*dst)->prev = NULL;
+//	(*dst)->prev = NULL;
 }
 
 // pa: take the first element of stack B and push it at the top of stack A
@@ -45,6 +45,6 @@ void	pb(t_stack **a, t_stack **b)
 	if (!(*a))
 		return ;
 	push_elements(a, b);
-	printf("---->number to push %d\n", (*b)->nb);
+//	printf("---->number to push %d\n", (*b)->nb);
 	write(1, "pb\n", 3);
 }

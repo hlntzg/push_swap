@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:27:52 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/04 09:35:17 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/23 15:16:11 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,29 @@ static void	swap_first_elements(t_stack **stack)
 {
 	t_stack	*tmp;
 
+	//printf("swap_first_elements::print stack before");
+	//print_stack(stack);
 	tmp = *stack;
 	*stack = (*stack)->next;
 	tmp->next = (*stack)->next;
-	if (tmp->next)
-		tmp->next->prev = tmp;
+//	if (tmp->next)
+//		tmp->next->prev = tmp;
 	(*stack)->next = tmp;
-	(*stack)->prev = tmp->prev;
-	tmp->prev = *stack;
+//	(*stack)->prev = tmp->prev;
+//	tmp->prev = *stack;
 }
 
 // sa: swap the first two elements of stack A
 // do nothing if there is only one element or if A is empty
 void	sa(t_stack **a)
 {
+//	printf("sa::print stack a before swap\n");
+//	print_stack(a);
 	if (!(*a) || (*a)->next == NULL)
 		return ;
 	swap_first_elements(a);
+	//printf("\nsa::print stack after check NULL on swap");
+	//print_stack(a);
 	write(1, "sa\n", 3);
 }
 

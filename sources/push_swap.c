@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:09:10 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/22 14:27:29 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/23 15:25:17 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,15 @@
 
 void	print_stack(t_stack **a)
 {
-	while (*a)
+	t_stack	*tmp = *a;
+	while (tmp)
 	{
-		printf("\n%d", (*a)->nb);
-		(*a) = (*a)->next;
+		printf("\n%d", tmp->nb);
+		tmp = tmp->next;
 	}		
 }
 
-/* int	main(int argc, char **argv)
+int	main(int argc, char **argv)
 {
 	t_stack	*a;
 	t_stack	*b;
@@ -36,15 +37,33 @@ void	print_stack(t_stack **a)
 	if (!stack_sorting_check(&a))
 		stack_sorting(&a, &b);
 	exit_success(&a, &b);
+/*	printf("\nBefore:\n");
+	print_stack(&a);
+	printf("\n\naction:\n");
+	pb(&a, &b);
+	printf("\n\naction:\n");
+	pb(&a, &b);
+	printf("\n\naction:\n");
+	pb(&a, &b);
+	printf("\nAfter a:\n");
+	print_stack(&a);
+	printf("\nAfter b:\n");
+	print_stack(&b);
+	printf("\n\naction:\n");
+	rr(&a, &b);
+	printf("\n\nAfter a:\n");
+	print_stack(&a);
+	printf("\n\nAfter b:\n");
+	print_stack(&b);
+	printf("\n\naction:\n");
+	ra(&a);
+	printf("\nAfter a:\n");
+	print_stack(&a);
+	printf("\nAfter b:\n");
+	print_stack(&b);*/
 }
- */
-/* static void rotate(t_stack **head)
-{
 
-	*head = (*head)->next; //new head
-
-} */
-
+/*
 int main(int argc, char **argv)
 {
 	t_stack	*a;
@@ -63,4 +82,4 @@ int main(int argc, char **argv)
 	ra(&a);
 	printf("\nAfter:\n");
 	print_stack(&a);
-}
+}*/
