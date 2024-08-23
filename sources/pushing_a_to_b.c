@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/20 17:47:59 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:04:14 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node)
 		return (position_a + (ft_stack_size(b) - position_b));
 	else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
 		return ((ft_stack_size(a) - position_a) + position_b);
-	return (0);
+	else
+		return (-1);
 }
 
 t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
@@ -92,8 +93,11 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 
 	while (ft_stack_size(a) > 3 && !stack_sorting_check(a))
 	{
+		printf("pushing_from_a_to_b::find_node_to_push_to_b\n");
 		node = find_node_to_push_to_b(a, b);
+		printf("pushing_from_a_to_b::ft_stack_position 1st\n");
 		position_a = ft_stack_position(a, node->nb);
+		printf("pushing_from_a_to_b::ft_stack_position 2nd\n");
 		position_b = ft_stack_position(b, (target_in_b(b, node))->nb);
 		if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
 			execute_operations_ra_rb(a, b, node); 
@@ -103,5 +107,7 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 			execute_operations_ra_rrb(a, b, node);
 		else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
 			execute_operations_rra_rb(a, b, node);
+		printf("pushing_from_a_to_b::end of while\n");
 	}
+	// printf("pushing_from_a_to_b\n");
 }

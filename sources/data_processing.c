@@ -40,7 +40,7 @@ static char	**args_processing(int argc, char **argv)
 	return (args);
 }
 
-static void	stack_appending(t_stack **a, int nb)
+/* static void	stack_appending(t_stack **a, int nb)
 {
 	t_stack	*new;
 	t_stack	*last;
@@ -60,6 +60,42 @@ static void	stack_appending(t_stack **a, int nb)
 		new->prev = last;
 	}
 }
+ */
+static void	stack_appending(t_stack **a, int nb)
+{
+	t_stack	*new;
+
+
+	new = malloc(sizeof(t_stack));
+	if (!new)
+		ft_error();
+
+	if (*a == NULL)
+	{
+		new->next = NULL;
+		new->nb = nb;
+		*a = new;
+
+		return ;
+	}
+	if ((*a)->next == NULL)
+	{
+		new->next = *a;
+		new->prev = *a;
+		new->nb = nb;
+
+		(*a)->next = new;
+		(*a)->prev = new;
+		return ;
+	}
+
+	new->next = (*a);
+	new->prev = (*a)->prev;
+	new->nb = nb;
+	(*a)->prev = new;
+
+}
+
 /*
 static	void	stack_ranking_data(t_stack **a)
 {

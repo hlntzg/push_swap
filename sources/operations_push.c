@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:30:51 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/05 15:48:28 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/21 17:12:04 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ void	pb(t_stack **a, t_stack **b)
 	if (!(*a))
 		return ;
 	push_elements(a, b);
+	printf("---->number to push %d\n", (*b)->nb);
 	write(1, "pb\n", 3);
 }

@@ -17,10 +17,15 @@ void	sorting_big(t_stack **a, t_stack **b)
 	int	i;
 
 	i = 2;
+	printf("sorting_big::start\n");
 	while (ft_stack_size(a) > 3 && i--)
 		pb(a, b);
+	printf("sorting_big::first while loop done\n");
 	if (ft_stack_size(a) > 3)
+	{
+		printf("sorting_big::pushing_from_a_to_b\n");
 		pushing_from_a_to_b(a, b);
+	}
 	if (!stack_sorting_check(a))
 		sorting_three(a);
 	printf("\nstack b:");

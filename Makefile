@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/20 09:21:16 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/23 09:16:58 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,11 @@ NAME = push_swap
 
 DIR_LIBFT = ./lib/libft
 DIR_SRC = ./sources
+DIR_OBJ = $(DIR_SRC)/objects
+
+CC = cc
+CFLAGS = -Wall -Wextra -Werror
+LIBFT_FLAGS = -L $(DIR_LIBFT) -lft
 
 SOURCES = push_swap.c \
 	data_processing.c \
@@ -31,37 +36,35 @@ SOURCES = push_swap.c \
 
 SRC = $(addprefix $(DIR_SRC)/,$(SOURCES))
 
-OBJECTS = $(SRC:.c=.o)
+OBJECTS = $(patsubst %.c,$(DIR_OBJ)/%.o,$(notdir $(SOURCES)))
 
 HEADERS = -I ./includes -I $(DIR_LIBFT)
 
-LIBFT = -L $(DIR_LIBFT) -lft
-
-CC = cc
-
-CFLAGS = -Wall -Wextra -Werror
+LIBFT = $(DIR_LIBFT)/libft.a
 
 RM = rm -rf
 
-all: $(NAME)
+all: $(LIBFT) $(NAME)
 
-$(NAME): libft $(OBJECTS)
-	$(CC) $(OBJECTS) $(LIBFT) $(HEADERS) -o $@
-
-libft: 
+$(LIBFT):
 	@make -C $(DIR_LIBFT)
 
-$(DIR_SRC)/%.o: $(DIR_SRC)/%.c
+$(NAME): $(OBJECTS)
+	$(CC) $(OBJECTS) $(LIBFT_FLAGS) $(HEADERS) -o $@
+
+$(DIR_OBJ)/%.o: $(DIR_SRC)/%.c | $(DIR_OBJ)
 	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
+$(DIR_OBJ):
+	mkdir -p $(DIR_OBJ)
 clean:
-	$(RM) $(OBJECTS)
+	@$(RM) $(DIR_OBJ)
 	@make -C $(DIR_LIBFT) clean
 
 fclean: clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 	@make -C $(DIR_LIBFT) fclean
 
 re: fclean all
 
-.PHONY: all libft clean fclean re
+.PHONY: all clean fclean re
