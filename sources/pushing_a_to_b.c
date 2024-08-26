@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 14:51:08 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 16:41:46 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,7 @@ t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
 	int		operations;
 
 	tmp = *a;
-//	node = tmp;
-	operations = INT_MAX; //calculate_operations_to_b(a, b, tmp);
+	operations = INT_MAX;
 	while (tmp)
 	{
 		if (operations > calculate_operations_to_b(a, b, tmp))
@@ -101,16 +100,12 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 		position_a = ft_stack_position(a, node_a->nb);
 		position_b = ft_stack_position(b, target->nb);
 		if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
-//			execute_operations_ra_rb(a, b, node_a); 
 			execute_ra_rb(a, b, node_a, 2); 
 		else if (position_a >= ft_stack_size(a) / 2 && position_b >= ft_stack_size(b) / 2)
-//			execute_operations_rra_rrb(a, b, node_a);
 			execute_rra_rrb(a, b, node_a, 2);
 		else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
-//			execute_operations_ra_rrb(a, b, node_a);
 			execute_ra_rrb(a, b, node_a, 2);
 		else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
-//			execute_operations_rra_rb(a, b, node_a);
 			execute_rra_rb(a, b, node_a, 2);
 		pb(a, b);
 	}

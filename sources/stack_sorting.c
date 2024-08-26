@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 14:53:55 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 16:34:36 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	sorting_big(t_stack **a, t_stack **b)
 				rra(a);
 		}
 	}
+
 }
 
 void	sorting_three(t_stack **a)

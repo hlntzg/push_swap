@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 10:24:23 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 16:40:16 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,10 @@ t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b);
 void	pushing_from_b_to_a(t_stack **a, t_stack **b);
 
 // execute operations
-void	execute_operations_ra_rb(t_stack **a, t_stack **b, t_stack *node);
-void	execute_operations_rra_rrb(t_stack **a, t_stack **b, t_stack *node);
-void	execute_operations_ra_rrb(t_stack **a, t_stack **b, t_stack *node);
-void	execute_operations_rra_rb(t_stack **a, t_stack **b, t_stack *node);
+//void	execute_operations_ra_rb(t_stack **a, t_stack **b, t_stack *node);
+//void	execute_operations_rra_rrb(t_stack **a, t_stack **b, t_stack *node);
+//void	execute_operations_ra_rrb(t_stack **a, t_stack **b, t_stack *node);
+//void	execute_operations_rra_rb(t_stack **a, t_stack **b, t_stack *node);
 
 void	execute_ra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction);
 void	execute_rra_rrb(t_stack **src, t_stack **dst, t_stack *node, int direction);
