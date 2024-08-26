@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/23 15:32:56 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 14:45:42 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_stack	*target_in_b(t_stack **b, t_stack *a_node)
 	
 	tmp = *b;
 	b_node = NULL;
-	if (a_node->nb < tmp->nb && a_node->nb > ft_stack_last(&tmp)->nb)
+	if (a_node->nb > tmp->nb && a_node->nb < ft_stack_last(&tmp)->nb)
 		return (tmp);
 	while (tmp)
 	{
@@ -87,27 +87,29 @@ t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
 
 void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 {
-	t_stack	*node;
+	t_stack	*node_a;
+	t_stack	*target;
 	int		position_a;
 	int		position_b;
 
 	while (ft_stack_size(a) > 3 && !stack_sorting_check(a))
 	{
-//		printf("pushing_from_a_to_b::find_node_to_push_to_b\n");
-		node = find_node_to_push_to_b(a, b);
-//		printf("pushing_from_a_to_b::ft_stack_position 1st\n");
-		position_a = ft_stack_position(a, node->nb);
-//		printf("pushing_from_a_to_b::ft_stack_position 2nd\n");
-		position_b = ft_stack_position(b, (target_in_b(b, node))->nb);
+		node_a = find_node_to_push_to_b(a, b);
+		target = target_in_b(b, node_a);
+		position_a = ft_stack_position(a, node_a->nb);
+		position_b = ft_stack_position(b, target->nb);
 		if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
-			execute_operations_ra_rb(a, b, node); 
+//			execute_operations_ra_rb(a, b, node_a); 
+			execute_ra_rb(a, b, node_a, 2); 
 		else if (position_a >= ft_stack_size(a) / 2 && position_b >= ft_stack_size(b) / 2)
-			execute_operations_rra_rrb(a, b, node);
+//			execute_operations_rra_rrb(a, b, node_a);
+			execute_rra_rrb(a, b, node_a, 2);
 		else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
-			execute_operations_ra_rrb(a, b, node);
+//			execute_operations_ra_rrb(a, b, node_a);
+			execute_ra_rrb(a, b, node_a, 2);
 		else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
-			execute_operations_rra_rb(a, b, node);
-//		printf("pushing_from_a_to_b::end of while\n");
+//			execute_operations_rra_rb(a, b, node_a);
+			execute_rra_rb(a, b, node_a, 2);
+		pb(a, b);
 	}
-	// printf("pushing_from_a_to_b\n");
 }

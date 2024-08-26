@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/23 15:43:09 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 14:42:19 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,42 @@ void	sorting_big(t_stack **a, t_stack **b)
 	int	i;
 
 	i = 2;
-//	printf("sorting_big::start\n");
 	while (ft_stack_size(a) > 3 && i--)
 		pb(a, b);
-//	printf("sorting_big::first while loop done\n");
 	if (ft_stack_size(a) > 3)
-//	{
-//		printf("sorting_big::pushing_from_a_to_b\n");
 		pushing_from_a_to_b(a, b);
-//	}
 	if (!stack_sorting_check(a))
 		sorting_three(a);
-	printf("\npushing_a_to_b && sorting_three::stack b:");
-	print_stack(b);
-	printf("\nspushing_a_to_b && sorting_three::tack a:");
-	print_stack(a);
+//	printf("\npushing_a_to_b && sorting_three::stack b:");
+//	print_stack(b);
+//	printf("\npushing_a_to_b && sorting_three::stack a:");
+//	print_stack(a);
+//	printf("\n----------------------");
 	pushing_from_b_to_a(a, b);
+//	printf("\npushing_b_to_a && stack a:");
+//	print_stack(a);
+//	printf("\npushing_b_to_a && stack b:");
+//	print_stack(b);
 // 	check if a is sorted and position of min in a to ra or rra (?)
+	if (!stack_sorting_check(a))
+	{
+//		printf("\nsorting_big::final sort");
+		i = ft_stack_position(a, ft_stack_min(a));
+		if (i <= ft_stack_size(a) / 2)
+		{
+			while ((*a)->nb != ft_stack_min(a))
+				ra(a);
+		}
+		else
+		{
+			while ((*a)->nb != ft_stack_min(a))
+				rra(a);
+		}
+	}
+//	printf("\npushing_b_to_a && stack a:");
+//	print_stack(a);
+//	printf("\npushing_b_to_a && stack b:");
+//	print_stack(b);
 }
 
 void	sorting_three(t_stack **a)

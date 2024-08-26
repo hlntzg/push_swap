@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/23 09:16:58 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/26 10:10:12 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,7 @@ SOURCES = push_swap.c \
 	operations_rotate.c \
 	operations_swap.c \
 	pushing_a_to_b.c \
+	pushing_b_to_a.c \
 	stack_sorting.c \
 	stack_sorting_check.c \
 	stack_utils.c \
