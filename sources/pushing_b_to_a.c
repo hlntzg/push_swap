@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:58:22 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 14:45:52 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 14:52:26 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 		if (operations > calculate_operations_to_a(a, b, tmp))
 		{
 			operations = calculate_operations_to_a(a, b, tmp);
+			if (operations == -1)
+				printf("ATTENTION IN B");
 			node = tmp;
 		}
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:39:13 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/23 13:44:01 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:00:54 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,6 @@ static void	shift_down_elements(t_stack **stack)
 	second_last->next = NULL;
 	first->next = *stack;
 	*stack = first;
-//	last = ft_stack_last(stack);
-//	*stack = last;
-//	last->prev->next = NULL;
-//	last->prev = NULL;
-//	first->prev = last;
-//	last->next = first;
 }
 
 // rra: shift down all elements of stack A by 1

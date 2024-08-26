@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:35:27 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/23 15:14:58 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 15:01:04 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,8 @@ static void	shift_up_elements(t_stack **stack)
 	first = *stack;
 	last = ft_stack_last(stack);
 	*stack = first->next;
-//	(*stack)->prev = NULL;
 	last->next = first;
 	first->next = NULL;
-	//first->prev = last;
-	//last->next = first;
 }
 
 // ra: shift up all elements of stack A by 1, the first become the last one
