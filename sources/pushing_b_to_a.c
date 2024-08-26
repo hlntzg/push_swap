@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:58:22 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 16:41:51 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/26 17:14:12 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,10 +58,11 @@ int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node)
 	}
 	else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
 		return (position_a + (ft_stack_size(b) - position_b));
-	else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
-		return ((ft_stack_size(a) - position_a) + position_b);
-	else
-		return (-1);
+//	else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+//		return ((ft_stack_size(a) - position_a) + position_b);
+//	else
+//		return (-1);
+	return ((ft_stack_size(a) - position_a) + position_b);
 }
 
 t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
@@ -77,8 +78,6 @@ t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 		if (operations > calculate_operations_to_a(a, b, tmp))
 		{
 			operations = calculate_operations_to_a(a, b, tmp);
-			if (operations == -1)
-				printf("ATTENTION IN B");
 			node = tmp;
 		}
 		tmp = tmp->next;
