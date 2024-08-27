@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 17:14:19 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/27 13:49:38 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,20 +49,20 @@ int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node)
 		else
 			return (position_b);
 	}
-	else if (position_a >= ft_stack_size(a) / 2 && position_b >= ft_stack_size(b) / 2)
+	else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
 	{
 		if ((ft_stack_size(a) - position_a) > (ft_stack_size(b) - position_b))
 			return (ft_stack_size(a) - position_a);
 		else
 			return (ft_stack_size(b) - position_b);
 	}
-	else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+	else if (position_a <= ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
 		return (position_a + (ft_stack_size(b) - position_b));
-//	else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
-//		return ((ft_stack_size(a) - position_a) + position_b);
-//	else
-//		return (-1);
-	return ((ft_stack_size(a) - position_a) + position_b);
+	else if (position_a > ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
+		return ((ft_stack_size(a) - position_a) + position_b);
+	else
+		return (-1);
+//	return ((ft_stack_size(a) - position_a) + position_b);
 }
 
 t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
@@ -100,11 +100,11 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 		position_b = ft_stack_position(b, target->nb);
 		if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
 			execute_ra_rb(a, b, node_a, 2); 
-		else if (position_a >= ft_stack_size(a) / 2 && position_b >= ft_stack_size(b) / 2)
+		else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
 			execute_rra_rrb(a, b, node_a, 2);
-		else if (position_a < ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+		else if (position_a <= ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
 			execute_ra_rrb(a, b, node_a, 2);
-		else if (position_a > ft_stack_size(a) / 2 && position_b < ft_stack_size(b) / 2)
+		else if (position_a > ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
 			execute_rra_rb(a, b, node_a, 2);
 		pb(a, b);
 	}
