@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/06/20 12:04:49 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/26 10:10:12 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/28 15:11:14 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ DIR_LIBFT = ./lib/libft
 DIR_SRC = ./sources
 DIR_OBJ = $(DIR_SRC)/objects
 
-CC = cc
+CC = gcc -g
 CFLAGS = -Wall -Wextra -Werror
 LIBFT_FLAGS = -L $(DIR_LIBFT) -lft
 

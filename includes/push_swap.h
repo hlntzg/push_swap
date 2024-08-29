@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 16:40:16 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/29 17:04:16 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,20 @@
 
 # include <stdio.h> // REMOVE BEFORE SUBMISSION!
 
+typedef struct s_info
+{
+	int	rotate;
+	int	reverse;
+	int	size;
+	int	position; //
+}	t_info;
+
 typedef struct s_stack
 {
 	int				nb;
-//	int				position;
+	t_info		info;
 	struct s_stack	*next;
-//	struct s_stack	*prev;
+	
 }	t_stack;
 
 void	print_stack(t_stack **a); // REMOVE BEFORE SUBMISSION!

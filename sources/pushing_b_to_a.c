@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:58:22 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/27 13:48:48 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/29 16:14:35 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack *target_in_a(t_stack **a, t_stack *b_node)
+t_stack	*target_in_a(t_stack **a, t_stack *b_node)
 {
 	t_stack *a_node;
 	t_stack	*tmp;
@@ -21,18 +21,38 @@ t_stack *target_in_a(t_stack **a, t_stack *b_node)
 	a_node = NULL;
 	if (b_node->nb < tmp->nb && b_node->nb > ft_stack_last(&tmp)->nb)
 		return (tmp);
-	while (tmp)
+	if (b_node->nb > ft_stack_max(a) || b_node->nb < ft_stack_min(a))
+	{
+		while (tmp->nb != ft_stack_min(a))
+			tmp = tmp->next;
+		return (tmp);
+	}
+	while (tmp->next)
+	{
+		if (b_node->nb > tmp->nb && b_node->nb < tmp->next->nb)
+			return (tmp->next);
+		tmp = tmp->next;
+	}
+/*	while (tmp)
 	{
 		if ((b_node->nb > ft_stack_max(a) || b_node->nb < ft_stack_min(a)) && tmp->nb == ft_stack_min(a))
 		{
 			a_node = tmp;
 			break ;
 		}
-		if (b_node->nb < tmp->nb && (!a_node || a_node->nb > tmp->nb))
-			a_node = tmp;
+		//if (b_node->nb < tmp->nb && (!a_node || a_node->nb > tmp->nb))
+		//	 	a_node = tmp;
+		if (tmp->next)
+		{
+			if (b_node->nb > tmp->nb && b_node->nb < (tmp->next->nb))
+			{
+				a_node = tmp->next;
+				break;
+			}
+		}
 		tmp = tmp->next;
 	}
-	return (a_node);
+	return (a_node);*/
 }
 
 int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node)
@@ -42,24 +62,31 @@ int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node)
 
 	position_a = ft_stack_position(a, (target_in_a(a, node))->nb);
 	position_b = ft_stack_position(b, node->nb);
-	if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
+	if (position_a <= (ft_stack_size(a) / 2) && position_b <= (ft_stack_size(b) / 2))
 	{
 		if (position_a > position_b)
 			return (position_a);
 		else
+		{
 			return (position_b);
+		}
+			
 	}
-	else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+	else if (position_a > (ft_stack_size(a) / 2) && position_b > (ft_stack_size(b) / 2))
 	{
 		if ((ft_stack_size(a) - position_a) > (ft_stack_size(b) - position_b))
 			return (ft_stack_size(a) - position_a);
 		else
 			return (ft_stack_size(b) - position_b);
 	}
-	else if (position_a <= ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+	else if (position_a <= (ft_stack_size(a) / 2) && position_b > (ft_stack_size(b) / 2))
+	{
 		return (position_a + (ft_stack_size(b) - position_b));
-	else if (position_a > ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
+	}
+	else if (position_a > (ft_stack_size(a) / 2) && position_b <= (ft_stack_size(b) / 2))
+	{
 		return ((ft_stack_size(a) - position_a) + position_b);
+	}	
 	else
 		return (-1);
 //	return ((ft_stack_size(a) - position_a) + position_b);
@@ -67,10 +94,23 @@ int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node)
 
 t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 {
+	int	max_b;
+	t_stack *tmp;
+
+	tmp = *b;
+	max_b = ft_stack_max(b);
+	while (tmp->nb != max_b)
+		tmp = tmp->next;
+	return (tmp);
+}
+/*
+t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
+{
 	t_stack	*node;
 	t_stack	*tmp;
 	int		operations;
 
+	node = NULL;
 	tmp = *b;
 	operations = INT_MAX;
 	while (tmp)
@@ -84,7 +124,7 @@ t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 	}
 	return (node);
 }
-
+*/
 void	pushing_from_b_to_a(t_stack **a, t_stack **b)
 {
 	t_stack	*node_b;
@@ -98,14 +138,15 @@ void	pushing_from_b_to_a(t_stack **a, t_stack **b)
 		target = target_in_a(a, node_b);
 		position_a = ft_stack_position(a, target->nb);
 		position_b = ft_stack_position(a, node_b->nb);
-		if (position_a <= ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
+		if (position_a <= (ft_stack_size(a) / 2) && position_b <= (ft_stack_size(b) / 2))
 			execute_ra_rb(b, a, node_b, 1);
-		else if (position_a > ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+		else if (position_a > (ft_stack_size(a) / 2) && position_b > (ft_stack_size(b) / 2))
 			execute_rra_rrb(b, a, node_b, 1);
-		else if (position_a <= ft_stack_size(a) / 2 && position_b > ft_stack_size(b) / 2)
+		else if (position_a <= (ft_stack_size(a) / 2) && position_b > (ft_stack_size(b) / 2))
 			execute_ra_rrb(b, a, node_b, 1);
-		else if (position_a > ft_stack_size(a) / 2 && position_b <= ft_stack_size(b) / 2)
+		else if (position_a > (ft_stack_size(a) / 2) && position_b <= (ft_stack_size(b) / 2))
 			execute_rra_rb(b, a, node_b, 1);
 		pa(b, a);
 	}
+
 }

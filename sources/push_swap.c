@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	print_stack(t_stack **a)
+/*void	print_stack(t_stack **a)
 {
 	t_stack	*tmp = *a;
 	while (tmp)
@@ -20,7 +20,7 @@ void	print_stack(t_stack **a)
 		printf("\n%d", tmp->nb);
 		tmp = tmp->next;
 	}		
-}
+}*/
 
 int	main(int argc, char **argv)
 {
@@ -36,5 +36,6 @@ int	main(int argc, char **argv)
 		exit_failure(&a, &b);
 	if (!stack_sorting_check(&a))
 		stack_sorting(&a, &b);
+//	print_stack(&a);
 	exit_success(&a, &b);
 }
