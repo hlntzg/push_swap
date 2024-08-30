@@ -6,33 +6,36 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/29 17:23:02 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:01:30 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*target_in_b(t_stack **b, t_stack *a_node)
+t_stack	*target_in_b(t_stack **b, t_stack *node_a)
 {
-	t_stack	*b_node;
+	t_stack	*node_b;
 	t_stack *tmp;
 	
 	tmp = *b;
-	b_node = NULL;
-	if (a_node->nb > tmp->nb && a_node->nb < ft_stack_last(&tmp)->nb)
+	node_b = NULL;
+	if (node_a->nb > tmp->nb && node_a->nb < ft_stack_last(&tmp)->nb)
 		return (tmp);
-	if (a_node->nb > ft_stack_max(b) || a_node->nb < ft_stack_min(b))
+	else if (node_a->nb > ft_stack_max(b) || node_a->nb < ft_stack_min(b))
 	{
 		while (tmp->nb != ft_stack_max(b))
 			tmp = tmp->next;
-		return (tmp);
+		node_b = tmp; //return (tmp);
 	}
 	while (tmp->next)
 	{
-		if (a_node->nb < tmp->nb && a_node->nb > tmp->next->nb)
-			return (tmp->next);
+		 if (node_a->nb < tmp->nb && node_a->nb > tmp->next->nb)
+			node_b = tmp->next;
+		//	return (tmp->next);
 		tmp = tmp->next; 
 	}
+	return (node_b);
+}
 	/*while (tmp)
 	{
 		if ((a_node->nb > ft_stack_max(b) || a_node->nb < ft_stack_min(b)) && tmp->nb == ft_stack_max(b))
@@ -53,43 +56,34 @@ t_stack	*target_in_b(t_stack **b, t_stack *a_node)
 		tmp = tmp->next;
 	}
 	return (b_node);*/
-}
 
-// TO DO
-
-int	get_rotate_moves(t_stack **stack, t_stack *node)
+int	ft_max(int a, int b) // add to libft ?
 {
-	ft_stack_position // ??
-	
+	if (a > b)
+		return (a);
+	else
+		return (b);
 }
 
-int	get_reverse_moves(t_stack **stack, t_stack *node)
-{
-	ft_stack_size - ft_stack_position // ??
-
-
-}
-
-ft_max() // add to libft ?
-
-
-int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node, t_stack *target) //could i have dir and get target here to use same function in both ways
+int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node, t_stack *target) 
 {
 	int	moves;
-	int	rev_move;
-
-	a->info.rotate = get_rotate_moves(a, node);
-	b->info.rotate = get_rotate_moves(b, target);
-	a->info.reverse = get_reverse_moves(a, node);
-	b->info.reverse = get_reverse_moves(b, target);
-	moves = ft_max(a->info.rotate, b->info.rotate);
-	rev_moves = ft_max(a->info.reverse, b->info.reverse);
+	int	rev_moves;
+	
+	target = target_in_b(b, node);
+	node->info.rotate = ft_stack_position(a, node->nb);
+	target->info.rotate = ft_stack_position(b, target->nb);
+	node->info.reverse = ft_stack_size(a) - ft_stack_position(a, node->nb);
+	target->info.reverse = ft_stack_size(b) - ft_stack_position(b, target->nb);
+	
+	moves = ft_max(node->info.rotate, target->info.rotate);
+	rev_moves = ft_max(node->info.reverse, target->info.reverse);
+	if (moves > node->info.rotate + target->info.reverse)
+		moves = node->info.rotate + target->info.reverse;
+	if (moves > node->info.reverse + target->info.rotate)
+		moves = node->info.reverse + target->info.rotate;
 	if (moves > rev_moves)
 		moves = rev_moves;
-	if (moves > a->info.rotate + b->info.reverse)
-		moves = a->info.rotate + b->info.reverse;
-	if (moves > a->info.reverse + b->info.rotate)
-		moves = a->info.rotate + b->info.reverse;
 	return (moves);
 }
 /*
@@ -133,19 +127,22 @@ t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
 	t_stack	*node;
 	t_stack	*target;
 	t_stack	*tmp;
-	int		min_operations;
-	int		operations;
+	int		min_moves;
+	int		moves;
 	
 	node = NULL;
 	tmp = *a;
-	min_operations = INT_MAX;
+//	tmp->info.moves = INT_MAX;
+	moves = INT_MAX;
+	//tmp->info.moves = 0;
 	while (tmp)
 	{	
-		target = target_in_b(a, b);		
-		operations = calculate_operations_to_b(a, b, tmp, target);
-		if (operations > min_operations)
+		target = target_in_b(b, tmp);
+		min_moves = calculate_operations_to_b(a, b, tmp, target);
+		if (moves > min_moves)
 		{
-			operations = min_operations;
+			tmp->info.moves = min_moves;
+			moves = min_moves;
 			node = tmp;
 		}
 		tmp = tmp->next;
@@ -157,11 +154,39 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 {
 	t_stack	*node_a;
 	t_stack	*target;
-	int		position_a;
-	int		position_b;
 
 	while (ft_stack_size(a) > 3 && !stack_sorting_check(a))
 	{
+		node_a = find_node_to_push_to_b(a, b);
+		target = target_in_b(b, node_a);
+		if (node_a->info.moves == node_a->info.rotate || node_a->info.moves == target->info.rotate)
+	//	{
+	//		printf("\npushing_from_a_to_b::if");
+		 	execute_rr_ra_rb(a, b, node_a, target);
+	//	}
+		else if (node_a->info.moves == node_a->info.reverse || node_a->info.moves == target->info.reverse)
+	//	{
+	//		printf("\npushing_from_a_to_b::else if");
+			execute_rrr_rra_rrb(a, b, node_a, target);
+	//	}
+		else
+		{
+	//		printf("\npushing_from_a_to_b::else");
+			execute_ra_or_rra(a, node_a);
+			execute_rb_or_rrb(b, target);
+		}
+		pb(a, b);
+
+	}
+}
+/*
+void	pushing_from_a_to_b(t_stack **a, t_stack **b)
+
+	t_stack	*node_a;
+	t_stack	*target;
+	int		position_a;
+	int		position_b;
+
 		node_a = find_node_to_push_to_b(a, b);
 		target = target_in_b(b, node_a);
 		position_a = ft_stack_position(a, node_a->nb);
@@ -174,6 +199,16 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 			execute_ra_rrb(a, b, node_a, 2);
 		else if (position_a > (ft_stack_size(a) / 2) && position_b <= (ft_stack_size(b) / 2))
 			execute_rra_rb(a, b, node_a, 2);
-		pb(a, b);
-	}
-}
+		pb(a, b);*/
+/*
+void	individual_best(t_stack **a, t_stack **b, t_stack)
+{
+	if (node->info.rotate < node->info.reverse)
+		RA
+	else
+		RRA
+	if (target->info.rotate < target->info.reverse)
+		RB
+	else
+		RRB
+}*/

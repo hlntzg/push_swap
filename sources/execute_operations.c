@@ -6,11 +6,63 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:16:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 13:45:22 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 11:39:30 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+void	execute_rr_ra_rb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b)
+{
+	//while (node->info.rotate > 0 && target->info.rotate > 0);
+	
+	while (*a != node_a && *b != node_b)
+		rr(a, b);
+	while (*a != node_a)
+		ra(a);
+	while (*b != node_b)
+		rb(b);
+}
+
+void	execute_rrr_rra_rrb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b)
+{
+	while (*a != node_a && *b != node_b)
+		rrr(a, b);
+	while (*a != node_a)
+		rra(a);
+	while (*b != node_b)
+		rrb(b);
+}
+
+void	execute_ra_or_rra(t_stack **a, t_stack *node)
+{
+	if (node->info.rotate < node->info.reverse)
+	{
+		while (*a != node)
+			ra(a);
+	}
+	else
+	{
+		while (*a != node)
+			rra(a);
+	}
+}
+
+void	execute_rb_or_rrb(t_stack **b, t_stack *node)
+{
+	if (node->info.rotate < node->info.reverse)
+	{
+		while (*b != node)
+			rb(b);
+	}
+	else
+	{
+		while (*b != node)
+			rrb(b);
+	}
+}
+
+
 /*
 void	execute_operations_ra_rb(t_stack **a, t_stack **b, t_stack *node)
 {
@@ -49,7 +101,7 @@ void	execute_operations_rra_rb(t_stack **a, t_stack **b, t_stack *node)
 		rb(b);
 }*/
 //////////////////////////////////////////////////////////////////////////////////////
-void	execute_ra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction)
+/*void	execute_ra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction)
 {
 	t_stack	*target;
 
@@ -143,4 +195,4 @@ void	execute_rra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction)
 		while ((*src)->nb != node->nb)
 			rb(src);
 	}
-}
+}*/

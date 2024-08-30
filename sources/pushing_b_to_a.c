@@ -6,33 +6,37 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:58:22 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/29 16:14:35 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:02:29 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-t_stack	*target_in_a(t_stack **a, t_stack *b_node)
+t_stack	*target_in_a(t_stack **a, t_stack *node_b)
 {
-	t_stack *a_node;
+	t_stack *node_a;
 	t_stack	*tmp;
 
 	tmp = *a;
-	a_node = NULL;
-	if (b_node->nb < tmp->nb && b_node->nb > ft_stack_last(&tmp)->nb)
+	node_a = NULL;
+	if (node_b->nb < tmp->nb && node_b->nb > ft_stack_last(&tmp)->nb)
 		return (tmp);
-	if (b_node->nb > ft_stack_max(a) || b_node->nb < ft_stack_min(a))
+	if (node_b->nb > ft_stack_max(a) || node_b->nb < ft_stack_min(a))
 	{
 		while (tmp->nb != ft_stack_min(a))
 			tmp = tmp->next;
-		return (tmp);
+		node_a = tmp;
+		//return (tmp);
 	}
 	while (tmp->next)
 	{
-		if (b_node->nb > tmp->nb && b_node->nb < tmp->next->nb)
-			return (tmp->next);
+		if (node_b->nb > tmp->nb && node_b->nb < tmp->next->nb)
+		//	return (tmp->next);
+			node_a = tmp->next;
 		tmp = tmp->next;
 	}
+	return (node_a);
+}
 /*	while (tmp)
 	{
 		if ((b_node->nb > ft_stack_max(a) || b_node->nb < ft_stack_min(a)) && tmp->nb == ft_stack_min(a))
@@ -52,9 +56,10 @@ t_stack	*target_in_a(t_stack **a, t_stack *b_node)
 		}
 		tmp = tmp->next;
 	}
-	return (a_node);*/
-}
+	return (a_node);
+*/
 
+/*
 int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node)
 {
 	int	position_a;
@@ -91,7 +96,8 @@ int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node)
 		return (-1);
 //	return ((ft_stack_size(a) - position_a) + position_b);
 }
-
+*/
+/*
 t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 {
 	int	max_b;
@@ -103,28 +109,80 @@ t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 		tmp = tmp->next;
 	return (tmp);
 }
-/*
+*/
+
+int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node, t_stack *target) 
+{
+	int	moves;
+	int	rev_moves;
+	
+	target = target_in_a(a, node);
+	node->info.rotate = ft_stack_position(b, node->nb);
+	target->info.rotate = ft_stack_position(a, target->nb);
+	node->info.reverse = ft_stack_size(b) - ft_stack_position(b, node->nb);
+	target->info.reverse = ft_stack_size(a) - ft_stack_position(a, target->nb);
+	
+	moves = ft_max(node->info.rotate, target->info.rotate);
+	rev_moves = ft_max(node->info.reverse, target->info.reverse);
+	if (moves > node->info.rotate + target->info.reverse)
+		moves = node->info.rotate + target->info.reverse;
+	if (moves > node->info.reverse + target->info.rotate)
+		moves = node->info.reverse + target->info.rotate;
+	if (moves > rev_moves)
+		moves = rev_moves;
+	return (moves);
+}
+
 t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 {
 	t_stack	*node;
+	t_stack	*target;
 	t_stack	*tmp;
-	int		operations;
+	int		min_moves;
+	int		moves;
 
 	node = NULL;
 	tmp = *b;
-	operations = INT_MAX;
+//	tmp->info.moves = INT_MAX;
+	moves = INT_MAX;
 	while (tmp)
 	{
-		if (operations > calculate_operations_to_a(a, b, tmp))
+		target = target_in_a(a, tmp);
+		min_moves = calculate_operations_to_a(a, b, tmp, target);
+		if (moves > min_moves)
+		//if (operations > calculate_operations_to_a(a, b, tmp))
 		{
-			operations = calculate_operations_to_a(a, b, tmp);
+			tmp->info.moves = min_moves;
+			moves = min_moves;	
 			node = tmp;
 		}
 		tmp = tmp->next;
 	}
 	return (node);
 }
-*/
+
+void	pushing_from_b_to_a(t_stack **a, t_stack **b)
+{
+	t_stack	*node_b;
+	t_stack	*target;
+
+	while (*b)
+	{
+		node_b = find_node_to_push_to_a(a, b);
+		target = target_in_a(a, node_b);
+		if (node_b->info.moves == node_b->info.rotate || node_b->info.moves == target->info.rotate)
+			execute_rr_ra_rb(a, b, target, node_b);
+		else if (node_b->info.moves == node_b->info.reverse || node_b->info.moves == target->info.reverse)
+			execute_rrr_rra_rrb(a, b, target, node_b);
+		else
+		{
+			execute_ra_or_rra(a, target); //RA or RRA
+			execute_rb_or_rrb(b, node_b); //RB or RRB
+		}
+		pa(b, a);
+	}	
+}
+/*
 void	pushing_from_b_to_a(t_stack **a, t_stack **b)
 {
 	t_stack	*node_b;
@@ -149,4 +207,4 @@ void	pushing_from_b_to_a(t_stack **a, t_stack **b)
 		pa(b, a);
 	}
 
-}
+}*/

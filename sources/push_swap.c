@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 14:09:10 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/27 09:58:23 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 12:45:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*void	print_stack(t_stack **a)
+void	print_stack(t_stack **a)
 {
 	t_stack	*tmp = *a;
 	while (tmp)
@@ -20,7 +20,7 @@
 		printf("\n%d", tmp->nb);
 		tmp = tmp->next;
 	}		
-}*/
+}
 
 int	main(int argc, char **argv)
 {

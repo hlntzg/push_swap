@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:05:05 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/29 17:04:16 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 11:45:13 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ typedef struct s_info
 {
 	int	rotate;
 	int	reverse;
-	int	size;
-	int	position; //
+	int	moves;
+//	int	size; 
+//	int	position;
 }	t_info;
 
 typedef struct s_stack
@@ -45,27 +46,33 @@ void	sorting_three(t_stack **a);
 void	sorting_big(t_stack **a, t_stack **b);
 
 // a to b
-t_stack	*target_in_b(t_stack **b, t_stack *a_node);
-int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node);
+t_stack	*target_in_b(t_stack **b, t_stack *node_a);
+int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node, t_stack *target);
 t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b);
 void	pushing_from_a_to_b(t_stack **a, t_stack **b);
 
 // b to a
-t_stack *target_in_a(t_stack **a, t_stack *b_node);
-int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node);
+t_stack *target_in_a(t_stack **a, t_stack *node_b);
+int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node, t_stack *target);
 t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b);
 void	pushing_from_b_to_a(t_stack **a, t_stack **b);
 
 // execute operations
+
+void	execute_rr_ra_rb(t_stack **a, t_stack **b, t_stack *node, t_stack *target);
+void	execute_rrr_rra_rrb(t_stack **a, t_stack **b, t_stack *node, t_stack *target);
+void	execute_ra_or_rra(t_stack **a, t_stack *node);
+void	execute_rb_or_rrb(t_stack **a, t_stack *node);
+
 //void	execute_operations_ra_rb(t_stack **a, t_stack **b, t_stack *node);
 //void	execute_operations_rra_rrb(t_stack **a, t_stack **b, t_stack *node);
 //void	execute_operations_ra_rrb(t_stack **a, t_stack **b, t_stack *node);
 //void	execute_operations_rra_rb(t_stack **a, t_stack **b, t_stack *node);
 
-void	execute_ra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction);
-void	execute_rra_rrb(t_stack **src, t_stack **dst, t_stack *node, int direction);
-void	execute_ra_rrb(t_stack **src, t_stack **dst, t_stack *node, int direction);
-void	execute_rra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction);
+//void	execute_ra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction);
+//void	execute_rra_rrb(t_stack **src, t_stack **dst, t_stack *node, int direction);
+//void	execute_ra_rrb(t_stack **src, t_stack **dst, t_stack *node, int direction);
+//void	execute_rra_rb(t_stack **src, t_stack **dst, t_stack *node, int direction);
 
 // utils
 t_stack	*ft_stack_last(t_stack **stack);
@@ -73,7 +80,7 @@ int		ft_stack_size(t_stack **stack);
 int		ft_stack_min(t_stack **stack);
 int		ft_stack_max(t_stack **stack);
 int		ft_stack_position(t_stack **stack, int nb);
-
+int		ft_max(int a, int b);
 // operations
 void	pa(t_stack **b, t_stack **a);
 void	pb(t_stack **a, t_stack **b);
