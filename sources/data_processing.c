@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/30 18:41:32 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 18:58:10 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static void	stack_appending(t_stack **a, int nb)
 
 	new = malloc(sizeof(t_stack));
 	if (!new)
+	{	
+		ft_free_stack(a);
 		ft_error();
+	}
 	new->nb = nb;
 	new->next = NULL;
 	if (*a == NULL)
