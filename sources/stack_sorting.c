@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 16:53:48 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/30 13:04:50 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:43:09 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,6 @@ void	sorting_big(t_stack **a, t_stack **b)
 		pushing_from_a_to_b(a, b);
 	if (!stack_sorting_check(a))
 		sorting_three(a);
-//	printf("\nstack a");
-//	print_stack(a);
-//	printf("\nstack b");
-//	print_stack(b);
 	pushing_from_b_to_a(a, b);
 	if (!stack_sorting_check(a))
 	{

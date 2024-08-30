@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 14:01:34 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/23 12:59:08 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:31:39 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,80 +50,15 @@ static void	stack_appending(t_stack **a, int nb)
 		ft_error();
 	new->nb = nb;
 	new->next = NULL;
-//	new->prev = NULL;
 	if (*a == NULL)
 		*a = new;
 	else
 	{
 		last = ft_stack_last(a);
 		last->next = new;
-//		new->prev = last;
 	}
 }
-/*
-static void	stack_appending(t_stack **a, int nb)
-{
-	t_stack	*new;
 
-
-	new = malloc(sizeof(t_stack));
-	if (!new)
-		ft_error();
-
-	if (*a == NULL)
-	{
-		new->next = NULL;
-		new->nb = nb;
-		*a = new;
-
-		return ;
-	}
-	if ((*a)->next == NULL)
-	{
-		new->next = *a;
-		new->prev = *a;
-		new->nb = nb;
-
-		(*a)->next = new;
-		(*a)->prev = new;
-		return ;
-	}
-
-	new->next = (*a);
-	new->prev = (*a)->prev;
-	new->nb = nb;
-	(*a)->prev = new;
-
-}
-
-static	void	stack_ranking_data(t_stack **a)
-{
-	int		i;
-	int		minimum;
-	t_stack	*tmp;
-	t_stack	*current;
-
-	i = 1;
-	while (i <= ft_stack_size(a))
-	{
-		tmp = *a;
-		minimum = INT_MAX;
-		current = NULL;
-		while (tmp)
-		{
-			if (tmp->nb <= minimum && tmp->position == 0)
-			{
-				minimum = tmp->nb;
-				current = tmp;
-			}
-			tmp = tmp->next;
-		}
-		if (current)
-			current->position = i;
-		i++;
-	}
-}
-*/
 void	stack_processing(int argc, char **argv, t_stack **a)
 {
 	char	**args;
@@ -140,5 +75,4 @@ void	stack_processing(int argc, char **argv, t_stack **a)
 	}
 	if (argc == 2)
 		ft_free_array(args);
-//	stack_ranking_data(a);
 }
