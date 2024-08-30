@@ -6,7 +6,7 @@
 #    By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/04/23 16:51:18 by hutzig            #+#    #+#              #
-#    Updated: 2024/08/30 15:29:34 by hutzig           ###   ########.fr        #
+#    Updated: 2024/08/30 18:22:49 by hutzig           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -95,6 +95,7 @@ all: $(NAME)
 # Rule to build the final library archive file;
 $(NAME): $(OBJECTS)
 	@$(AR) $(NAME) $(OBJECTS)
+	@echo "libft is generated!"
 
 # Rule to build the bonus functions and add them to the library;
 bonus: .bonus
@@ -107,11 +108,13 @@ bonus: .bonus
 clean:
 	@$(RM) $(OBJECTS) $(BONUS_O)
 	@$(RM) .bonus
+	@echo "libft objects are removed!"
 
 # Target that also removes the executable;
 fclean: clean
 	@$(RM) $(NAME)
 	@$(RM) .bonus
+	@echo "libft archive file is removed!"
 
 # Target that cleans and rebuilds ('all') the project;
 re:	fclean all

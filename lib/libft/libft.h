@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:11:28 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/09 14:11:41 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 16:28:47 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ char	*ft_itoa(int n);
 
 char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 void	ft_striteri(char *s, void (*f)(unsigned int, char *));
+
+/* Additional functions */
+int	ft_max(int a, int b);
 
 /* Libft - bonus part */
 

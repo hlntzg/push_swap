@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/20 12:39:13 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/26 15:00:54 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:54:26 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// this function shifts down all the elements by 1, last becomes the first one
+/* This function shifts down all the elements by 1, last becomes the first. */
 static void	shift_down_elements(t_stack **stack)
 {
 	t_stack	*first;
@@ -30,7 +30,7 @@ static void	shift_down_elements(t_stack **stack)
 	*stack = first;
 }
 
-// rra: shift down all elements of stack A by 1
+/* rra: shift down all elements of stack A by 1. */
 void	rra(t_stack **a)
 {
 	if (!(*a) || !(*a)->next)
@@ -39,7 +39,7 @@ void	rra(t_stack **a)
 	write(1, "rra\n", 4);
 }
 
-// rrb: shift down all elements of stack B by 1
+/* rrb: shift down all elements of stack B by 1. */
 void	rrb(t_stack **b)
 {
 	if (!(*b) || !(*b)->next)
@@ -48,7 +48,7 @@ void	rrb(t_stack **b)
 	write(1, "rrb\n", 4);
 }
 
-// rrr: rra & rrb at the same time
+/* rrr: rra & rrb at the same time. */
 void	rrr(t_stack **a, t_stack **b)
 {
 	if (!(*a) || !(*b) || !(*a)->next || !(*b)->next)

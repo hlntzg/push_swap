@@ -6,11 +6,26 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/28 13:37:26 by hutzig            #+#    #+#             */
-/*   Updated: 2024/07/19 12:33:52 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 16:10:33 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+/* This function checks if the stack is sorted in ascending order. */
+bool	stack_sorting_check(t_stack **a)
+{
+	t_stack	*tmp;
+
+	tmp = *a;
+	while (tmp->next)
+	{
+		if (tmp->nb > tmp->next->nb)
+			return (false);
+		tmp = tmp->next;
+	}
+	return (true);
+}
 
 bool	stack_checking_dup(t_stack *a)
 {

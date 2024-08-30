@@ -6,13 +6,13 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/15 15:16:42 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/30 15:30:44 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 17:28:08 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	execute_rr_ra_rb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b)
+void	rr_ra_rb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b)
 {
 	while (*a != node_a && *b != node_b)
 		rr(a, b);
@@ -22,7 +22,7 @@ void	execute_rr_ra_rb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b
 		rb(b);
 }
 
-void	execute_rrr_rra_rrb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b)
+void	rrr_rra_rrb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *node_b)
 {
 	while (*a != node_a && *b != node_b)
 		rrr(a, b);
@@ -32,7 +32,7 @@ void	execute_rrr_rra_rrb(t_stack **a, t_stack **b, t_stack *node_a, t_stack *nod
 		rrb(b);
 }
 
-void	execute_ra_or_rra(t_stack **a, t_stack *node)
+void	ra_or_rra(t_stack **a, t_stack *node)
 {
 	if (node->info.rotate < node->info.reverse)
 	{
@@ -46,7 +46,7 @@ void	execute_ra_or_rra(t_stack **a, t_stack *node)
 	}
 }
 
-void	execute_rb_or_rrb(t_stack **b, t_stack *node)
+void	rb_or_rrb(t_stack **b, t_stack *node)
 {
 	if (node->info.rotate < node->info.reverse)
 	{

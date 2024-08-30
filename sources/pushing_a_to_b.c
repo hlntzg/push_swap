@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/30 15:29:09 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 17:48:08 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 t_stack	*target_in_b(t_stack **b, t_stack *node_a)
 {
 	t_stack	*node_b;
-	t_stack *tmp;
-	
+	t_stack	*tmp;
+
 	tmp = *b;
 	node_b = NULL;
 	if (node_a->nb > tmp->nb && node_a->nb < ft_stack_last(&tmp)->nb)
@@ -29,18 +29,18 @@ t_stack	*target_in_b(t_stack **b, t_stack *node_a)
 	}
 	while (tmp->next)
 	{
-		 if (node_a->nb < tmp->nb && node_a->nb > tmp->next->nb)
+		if (node_a->nb < tmp->nb && node_a->nb > tmp->next->nb)
 			node_b = tmp->next;
-		tmp = tmp->next; 
+		tmp = tmp->next;
 	}
 	return (node_b);
 }
 
-int	calculate_operations_to_b(t_stack **a, t_stack **b, t_stack *node, t_stack *target) 
+int	moves_to_b(t_stack **a, t_stack **b, t_stack *node, t_stack *target)
 {
 	int	moves;
 	int	rev_moves;
-	
+
 	target = target_in_b(b, node);
 	node->info.rotate = ft_stack_position(a, node->nb);
 	target->info.rotate = ft_stack_position(b, target->nb);
@@ -64,14 +64,14 @@ t_stack	*find_node_to_push_to_b(t_stack **a, t_stack **b)
 	t_stack	*tmp;
 	int		min_moves;
 	int		moves;
-	
+
 	tmp = *a;
 	node = NULL;
 	moves = INT_MAX;
 	while (tmp)
 	{	
 		target = target_in_b(b, tmp);
-		min_moves = calculate_operations_to_b(a, b, tmp, target);
+		min_moves = moves_to_b(a, b, tmp, target);
 		if (moves > min_moves)
 		{
 			tmp->info.moves = min_moves;
@@ -92,16 +92,17 @@ void	pushing_from_a_to_b(t_stack **a, t_stack **b)
 	{
 		node_a = find_node_to_push_to_b(a, b);
 		target = target_in_b(b, node_a);
-		if (node_a->info.moves == node_a->info.rotate || node_a->info.moves == target->info.rotate)
-		 	execute_rr_ra_rb(a, b, node_a, target);
-		else if (node_a->info.moves == node_a->info.reverse || node_a->info.moves == target->info.reverse)
-			execute_rrr_rra_rrb(a, b, node_a, target);
+		if (node_a->info.moves == node_a->info.rotate
+			|| node_a->info.moves == target->info.rotate)
+			rr_ra_rb(a, b, node_a, target);
+		else if (node_a->info.moves == node_a->info.reverse
+			|| node_a->info.moves == target->info.reverse)
+			rrr_rra_rrb(a, b, node_a, target);
 		else
 		{
-			execute_ra_or_rra(a, node_a);
-			execute_rb_or_rrb(b, target);
+			ra_or_rra(a, node_a);
+			rb_or_rrb(b, target);
 		}
 		pb(a, b);
-
 	}
 }

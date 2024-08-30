@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/04 09:20:11 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/29 15:51:35 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 15:59:10 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ int	ft_stack_max(t_stack **stack)
 
 int	ft_stack_position(t_stack **stack, int nb)
 {
-	int		position;
+	int		i;
 	t_stack	*tmp;
 
-	position = 0;
+	i = 0;
 	tmp = *stack;
 	while (tmp && tmp->nb != nb)
 	{
 		tmp = tmp->next;
-		position++;
+		i++;
 	}
-	return (position);
+	return (i);
 }

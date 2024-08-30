@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:58:22 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/30 15:22:33 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/08/30 17:48:33 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_stack	*target_in_a(t_stack **a, t_stack *node_b)
 {
-	t_stack *node_a;
+	t_stack	*node_a;
 	t_stack	*tmp;
 
 	tmp = *a;
@@ -36,11 +36,11 @@ t_stack	*target_in_a(t_stack **a, t_stack *node_b)
 	return (node_a);
 }
 
-int	calculate_operations_to_a(t_stack **a, t_stack **b, t_stack *node, t_stack *target) 
+int	moves_to_a(t_stack **a, t_stack **b, t_stack *node, t_stack *target)
 {
 	int	moves;
 	int	rev_moves;
-	
+
 	target = target_in_a(a, node);
 	node->info.rotate = ft_stack_position(b, node->nb);
 	target->info.rotate = ft_stack_position(a, target->nb);
@@ -71,11 +71,11 @@ t_stack	*find_node_to_push_to_a(t_stack **a, t_stack **b)
 	while (tmp)
 	{
 		target = target_in_a(a, tmp);
-		min_moves = calculate_operations_to_a(a, b, tmp, target);
+		min_moves = moves_to_a(a, b, tmp, target);
 		if (moves > min_moves)
 		{
 			tmp->info.moves = min_moves;
-			moves = min_moves;	
+			moves = min_moves;
 			node = tmp;
 		}
 		tmp = tmp->next;
@@ -92,14 +92,16 @@ void	pushing_from_b_to_a(t_stack **a, t_stack **b)
 	{
 		node_b = find_node_to_push_to_a(a, b);
 		target = target_in_a(a, node_b);
-		if (node_b->info.moves == node_b->info.rotate || node_b->info.moves == target->info.rotate)
-			execute_rr_ra_rb(a, b, target, node_b);
-		else if (node_b->info.moves == node_b->info.reverse || node_b->info.moves == target->info.reverse)
-			execute_rrr_rra_rrb(a, b, target, node_b);
+		if (node_b->info.moves == node_b->info.rotate
+			|| node_b->info.moves == target->info.rotate)
+			rr_ra_rb(a, b, target, node_b);
+		else if (node_b->info.moves == node_b->info.reverse
+			|| node_b->info.moves == target->info.reverse)
+			rrr_rra_rrb(a, b, target, node_b);
 		else
 		{
-			execute_ra_or_rra(a, target);
-			execute_rb_or_rrb(b, node_b);
+			ra_or_rra(a, target);
+			rb_or_rrb(b, node_b);
 		}
 		pa(b, a);
 	}	
