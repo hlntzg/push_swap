@@ -6,7 +6,7 @@
 /*   By: hutzig <hutzig@student.hive.fi>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/20 08:55:06 by hutzig            #+#    #+#             */
-/*   Updated: 2024/08/30 17:48:08 by hutzig           ###   ########.fr       */
+/*   Updated: 2024/09/02 16:07:40 by hutzig           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ int	moves_to_b(t_stack **a, t_stack **b, t_stack *node, t_stack *target)
 	int	moves;
 	int	rev_moves;
 
-	target = target_in_b(b, node);
 	node->info.rotate = ft_stack_position(a, node->nb);
 	target->info.rotate = ft_stack_position(b, target->nb);
 	node->info.reverse = ft_stack_size(a) - ft_stack_position(a, node->nb);
